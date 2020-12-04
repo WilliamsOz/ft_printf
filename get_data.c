@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 18:24:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/03 11:46:05 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,19 @@ void	get_lenght(const char *src, t_data *data, int i)
 		src[i] != '%' && src[i] != 'n')
 	{
 		if (src[i] == 'l' && src[i + 1] == 'l')
+		{
 			(*data).d_l++;
+			while (src[i] == 'l')
+				i++;
+		}
 		else if (src[i] == 'l')
 			(*data).l++;
 		else if (src[i] == 'h' && src[i + 1] == 'h')
+		{
 			(*data).d_h++;
+			while (src[i] == 'h')
+				i++;	
+		}
 		else if (src[i] == 'h')
 			(*data).h++;
 		i++;

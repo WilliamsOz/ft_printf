@@ -3,52 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 19:16:50 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/04 10:37:21 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf_libft.h"
 
-// t_data	sort_data(t_data data)
-// {
-	
-// 	return (data);
-// }
+t_data	sort_data(t_data data, va_list list)
+{
+	if (data.zero > 0 && data.minus > 0)
+		data.zero = 0;
+	if (data.space > 0 && data.plus > 0)
+		data.space = 0;	
+	if (data.width_star > 0)
+		data.width_star = va_arg(list, int);
+	return (data);
+}
 
-char	*get_content(const char *src, va_list list, char *c_str)
+char	*treat_content(const char *src, va_list list, char *c_str)
 {
 	t_data	data;
-	(void)list;
 	
 	data.conv = 0;
 	data = init_data_zero(data);
 	data = get_data(src, data, 0);
-	// data = sort_data(data);
+	data = sort_data(data, list);
+	str = va_arg(list, char*);
+	a = va_arg(list, int);
+	// if (is_there_particular_case() == 1)
+		// return (c_str);
 	// exploit_data();
 
 	/*----------- PRINT DATA -----------*/
 
+	printf("\n-------------------- FIRST DATA --------------------\n");
 	
-	// printf("minus = %d\n", data.minus);
-	// printf("plus = %d\n", data.plus);
-	// printf("zero = %d\n", data.zero);
-	// printf("space = %d\n", data.space);
-	// printf("htag = %d\n", data.htag);
-	// printf("width_star = %d\n", data.width_star);
-	// printf("width = %d\n", data.width);
-	// printf("precision_coma = %d\n", data.precision_coma);
-	// printf("precision_star = %d\n", data.precision_star);
-	// printf("precision_num = %d\n", data.precision_num);
-	// printf("l = %d\n", data.l);
-	// printf("d_l = %d\n", data.d_l);
-	// printf("h = %d\n", data.h);
-	// printf("d_h = %d\n", data.d_h);
-	// printf("conversion = %c\n", data.conv);
+	printf("minus = %d\n", data.minus);
+	printf("plus = %d\n", data.plus);
+	printf("zero = %d\n", data.zero);
+	printf("space = %d\n", data.space);
+	printf("htag = %d\n", data.htag);
+	printf("width_star = %d\n", data.width_star);
+	printf("width = %d\n", data.width);
+	printf("precision_coma = %d\n", data.precision_coma);
+	printf("precision_star = %d\n", data.precision_star);
+	printf("precision_num = %d\n", data.precision_num);
+	printf("l = %d\n", data.l);
+	printf("d_l = %d\n", data.d_l);
+	printf("h = %d\n", data.h);
+	printf("d_h = %d\n", data.d_h);
+	printf("conversion = %c\n", data.conv);
 
-	
+	printf("-------------------- END DATA --------------------\n\n");
+
 	return (c_str);
 }
 
@@ -70,7 +80,7 @@ char	*read_input(const char *src, va_list list, int i, char *c_str)
 		}
 		else if (src[i] == '%')
 		{
-			c_str = get_content(src + (i + 1), list, c_str);
+			c_str = treat_content(src + (i + 1), list, c_str);
 			i = get_end(src, i + 1);
 			keep = i;
 		}
@@ -101,7 +111,7 @@ int     ft_printf(const char *format, ...)
 int     main(void)
 {
 	// printf("%d\n", ft_printf(""));
-	printf("%d\n", ft_printf("Cou%cou : d Cou%cou", 42)); // pb pas d'erreur
+	printf("%d\n", ft_printf("Cou%*sou", -10050, NULL, 5));
 	// printf("%d\n", ft_printf("percentage = %% \nchar = %c \nstring = %s \ndecimal = %d \ninteger = %i \n", 'c', "Willy", 42, 42));
 	// printf("%d\n", ft_printf("percentage = %% \nchar = %c \nstring = %s \ndecimal = %d \ninteger = %i \n", 'c', "Willy", 42, 42));
 	// printf("%d\n", ft_printf(""));

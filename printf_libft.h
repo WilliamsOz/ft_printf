@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_libft.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:36:36 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 18:25:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/03 12:27:30 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct		s_data
 	int				h;
 	int				d_h;
 	int				indicator;
+	char			*arg_string;
+	char			arg_char;
+	long			arg_integer;
 }					t_data;
 
 t_list				init_lk_l_data(t_list *lk_list);

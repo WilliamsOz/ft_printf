@@ -29,7 +29,7 @@ int main(void)
 	// long long a = 42;
 	// printf("[%010.5lld]", a);s
 
-	printf("%d\n", 42);
+	printf("%-10.*s\n", 10, NULL);
 
 
 
