@@ -3,33 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   check_bad_format.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:16:02 by user42            #+#    #+#             */
-/*   Updated: 2020/11/18 23:15:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/17 00:42:28 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-int		strcmp_missingconv(const char *src, char *conv, int i, int j)       	// Compare 2 string and return index + 1 if conversion is found, othewise return -1
+static int	isind_compatible(const char *src, int start, int end, int is_width)
 {
-	while (src[i] != '\0')
+	if (src[start] == '0' && sp_zero(src, start, 0) == -1)
+		return (-1);
+	while (src[start] >= '0' && src[start] <= '9')
 	{
-		while (src[i] != '\0' && conv[j] != '\0' && src[i] != conv[j])
-			j++;
-		if (src[i] == conv[j] && conv[j] != '\0')
-			return (i + 1);
-		else
-		{
-			j = 0;
-			i++;
-		}
+		if (src[start] >= '1' && src[start] <= '9')
+			is_width = 1;
+		start++;
 	}
-	return (-1);
+	while (start < end)
+	{
+		if (src[start] == '+' && sp_plus(src, start, is_width) == -1)
+			return (-1);
+		else if (src[start] == ' ' && sp_space(src, start, is_width) == -1)
+			return (-1);
+		else if (src[start] == '-' && sp_minus(src, start, is_width) == -1)
+			return (-1);
+		else if (src[start] == '.' && pr_coma(src, start) == -1)
+			return (-1);
+		else if (src[start] == '*' && pr_star(src, start, 0) == -1)
+			return (-1);
+		start++;
+	}
+	return (1);
 }
 
-int		check_for_unknow(const char *src, int i, int keep)						// check that flag and conversion after % is know OK
+static int	check_for_unknow(const char *src, int i, int keep)						// check that flag and conversion after % is know OK
 {
 	while (i < keep)
 	{
@@ -43,7 +53,7 @@ int		check_for_unknow(const char *src, int i, int keep)						// check that flag 
 	return (1);
 }
 
-int		check_format_after_lenght(const char *src, int start)
+static int	check_format_after_lenght(const char *src, int start)
 {
 	while (src[start] == 'l' || src[start] == 'h')
 		start++;
@@ -54,7 +64,7 @@ int		check_format_after_lenght(const char *src, int start)
 	return (1);
 }
 
-int		check_lenght(const char *src, int start, int end)
+static int		check_lenght(const char *src, int start, int end)
 {
 	t_data	data;
 	
@@ -78,7 +88,7 @@ int		check_lenght(const char *src, int start, int end)
 	return (1);
 }
 
-int		check_missing_conv(const char *src, char *conv, int i)					//check if conversion exist after %
+int				check_missing_conv(const char *src, char *conv, int i)					//check if conversion exist after %
 {
 	int start;
 
@@ -88,12 +98,12 @@ int		check_missing_conv(const char *src, char *conv, int i)					//check if conve
 		{
 			i++;
 			start = i;
-			i = strcmp_missingconv(src, conv, i, 0);							// Compare 2 string and return index + 1 if conversion is found, othewise return -1
+			i = strcmp_missing_conv(src, conv, i, 0);							// Compare 2 string and return index + 1 if conversion is found, othewise return -1
 			if (i == -1)
 				return (-1);
 			else if (check_for_unknow(src, start, i - 1) == -1)
 				return (-1);
-			else if (check_compatibility(src, start, i - 1, 0) == -1)
+			else if (isind_compatible(src, start, i - 1, 0) == -1)
 				return (-1);
 			else if (check_lenght(src, start, i - 1) == -1)
 				return (-1);

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   strcmp_missing_conv.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/14 12:53:57 by user42            #+#    #+#             */
-/*   Updated: 2020/12/15 15:45:36 by wiozsert         ###   ########.fr       */
+/*   Created: 2020/12/11 16:13:55 by wiozsert          #+#    #+#             */
+/*   Updated: 2020/12/11 16:15:13 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int		strcmp_missing_conv(const char *src, char *conv, int i, int j)       	// Compare 2 string and return index + 1 if conversion is found, othewise return -1
 {
-	size_t	len;
-
-	len = 0;
-	if (s == NULL)
-		return (0);
-	while (s[len] != '\0')
-		len++;
-	return (len);
+	while (src[i] != '\0')
+	{
+		while (src[i] != '\0' && conv[j] != '\0' && src[i] != conv[j])
+			j++;
+		if (src[i] == conv[j] && conv[j] != '\0')
+			return (i + 1);
+		else
+		{
+			j = 0;
+			i++;
+		}
+	}
+	return (-1);
 }

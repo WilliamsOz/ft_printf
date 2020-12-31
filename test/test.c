@@ -3,70 +3,58 @@
 #endif
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+// static long		ft_intlen(long nbr)
+// {
+// 	int		i;
+// 	long	len;
+
+// 	i = 1;
+// 	len = 1;
+// 	while (nbr >= 10)
+// 	{
+// 		nbr /= 10;
+// 		i++;
+// 	}
+// 	while (--i > 0)
+// 		len *= 10;
+// 	return (len);
+// }
+
+// void			ft_putnbr(long n)
+// {
+// 	char	res[10];
+// 	long	nbr;
+// 	int		i;
+// 	long	cc;
+
+// 	nbr = n;
+// 	i = -1;
+// 	cc = 0;
+// 	while (++i < 10)
+// 		res[i] = '\0';
+// 	if (nbr < 0)
+// 	{
+// 		write(1, "-", 1);
+// 		nbr *= -1;
+// 	}
+// 	i = 0;
+// 	cc = ft_intlen(nbr);
+// 	while (cc > 0)
+// 	{
+// 		res[i] = ('0' + ((nbr / cc) % 10));
+// 		write(1, &res[i], 1);
+// 		cc /= 10;
+// 		i++;
+// 	}
+// }
 
 int main(void)
 {
-	// int a;
+	char	*str;
 
-	// a = 42;
-	// void* b;
-
-	// b = &a;
-	// printf("%d", printf("%*p|", 5, b));
-	/*	printf("%.0d", 1); // cas particulier */
-	/*	printf("%#.f", 42.42); // cas particulier */
-	// printf("%.0d", 0);
-	// printf("|%d|\n", printf("Coucou\n %s\n %d\n %n\n", "Coucou", 42, &i));
-	// printf("%-10.10s", "coucou");
-	// printf("%d\n", printf(""));
-	// printf("%d\n", i);
-	// int i;
-	// printf("[%-.*d]\n", 42);		// ajouter un check pour le bon format
-	// i = 0;
-	// printf("[%d%s%n]\n", 42, "Coucou", &i);
-	// printf("[%10.0d]\n", 0); //cas particulier
-	// printf("[%.*d]\n", 1, 0);
-	// long long a = 42;
-	// printf("[%010.5lld]", a);s
-
-	printf("%-10.*s\n", 10, NULL);
-
-
-
-
-	/*--------ASPRINTF--------*/
-	// char *cc;
-
-	// if (asprintf(&cc, "%s\n", "Coucou") == EXIT_FAILURE)
-	// 	return (EXIT_FAILURE);
-	// else
-	// 	printf("%s\n", cc);
-	// free(cc);
-
+	asprintf(&str, "%.50d", 10000);
+	printf("%s\n", str);
 	return (0);
 }
-
-// Indicator	- || + || 0 || sp || #
-// Precision	. || *
-
-// ld float
-// intmax_t d, i, c, u
-// int u
-/*---------------------------------- 'cspdiuxX%' '-0.*' ----------------------------------*/
-
-// Si on utilise % avec %, aucune flag n'est ajoutable, la fonction imprime seulement %.
-// Il n'est pas possible d'utiliser la conversion 'p' avec le flag '.'.
-// Il n'est pas possible d'utiliser la conversion 'c' avec le flag '.'. 
-
-/* Resultat indefini avec :
-f 0 c c
-f 0 c s
-f 0 c p
-
-f . c c
-f . c p
-
-*/
-
-// s
-// d, i, u, x, X

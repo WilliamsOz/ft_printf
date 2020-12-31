@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:46:23 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 11:14:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/31 15:49:35 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,60 +16,57 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
+# include <stdio.h>				//del
 
-typedef struct		s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+/* PRINT DATA
+	printf("minus = %d\n", data.minus);
+	printf("plus = %d\n", data.plus);
+	printf("zero = %d\n", data.zero);
+	printf("space = %d\n", data.space);
+	printf("htag = %d\n", data.htag);
+	printf("width_star = %d\n", data.width_star);
+	printf("width = %d\n", data.width);
+	printf("precision_coma = %d\n", data.precision_coma);
+	printf("precision_star = %d\n", data.precision_star);
+	printf("l = %d\n", data.l);
+	printf("d_l = %d\n", data.d_l);
+	printf("h = %d\n", data.h);
+	printf("d_h = %d\n", data.d_h);
+	printf("conversion = %c\n", data.conv);
+*/
 
-void				ft_putchar(char c);
-void				ft_putnbr(int nb);
-void				ft_putstr(char *str);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
-void				ft_putendl_fd(char *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
+# define DEBUG printf("ICI\n");
+# define PRINTD(x) printf("%d\n", x);
+# define PRINTC(x) printf("%c\n", x);
+# define PRINTS(x) printf("%s\n", x);
+# define PRINTP(x) printf("%p\n", x);
+# define PRINTZ(x) printf("%zu\n", x);
+#define KNRM  "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
+
+//DEL
+
+// typedef struct		s_list
+// {
+// 	void			*content;
+// 	struct s_list	*next;
+// }					t_list;
+
+int					ft_strcmp(const char *s1, const char *s2);
+void				buffer_memset(char *buffer, size_t BUFFER_SIZE);
+char				*ft_uitoa(uintmax_t n);
+char				*ft_itoa(intmax_t n);
 int					ft_atoi(const char *nptr);
-int					ft_toupper(int c);
-int					ft_tolower(int c);
+char				*ft_strsjoin(char *str1, char *str2, int i, int len);
 size_t				ft_strlen(const char *s);
-void				ft_bzero(void *s, size_t n);
-int					ft_isalpha(int c);
-int					ft_isascii(int c);
-int					ft_isdigit(int c);
-int					ft_isalnum(int c);
-int					ft_isprint(int c);
-int					ft_memcmp(const void *s1, const void *s2, size_t n);
-void				*ft_memchr(const void *s, int c, size_t n);
-void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
-void				*ft_memcpy(void *dest, const void *src, size_t n);
-void				*ft_memmove(void *dest, const void *src, size_t n);
-void				*ft_memset(void *s, int c, size_t n);
-void				*ft_calloc(size_t nmemb, size_t size);
-char				*ft_strnstr(const char *big, const char *little,
-								size_t len);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				*ft_strchr(const char *s, int c);
-char				*ft_strrchr(const char *s, int c);
-char				*ft_strdup(const char *s);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strtrim(char const *s1, char const *set);
-char				**ft_split(char const *s, char c);
-size_t				ft_strlcpy(char *dst, const char *src, size_t size);
-size_t				ft_strlcat(char *dst, const char *src, size_t size);
-char				*ft_itoa(int n);
-char				*ft_strmapi(char const *s, char(*f)(unsigned int, char));
-t_list				*ft_lstnew(void *content);
-void				ft_lstadd_front(t_list **alst, t_list *new);
-void				ft_lstadd_back(t_list **alst, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_lstdelone(t_list *lst, void(*del)(void*));
-void				ft_lstclear(t_list **lst, void(*del)(void*));
-void				ft_lstiter(t_list *lst, void(*f)(void*));
-t_list				*ft_lstmap(t_list *lst, void*(*f)(void*),
-								void(*del)(void*));
+int					strcmp_missing_conv(const char *src, char *conv, int i,
+	int j);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:50:45 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 17:38:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/12/11 16:33:38 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-int		check_bad_place(const char *src, int start, int end, t_data data)		//check the good format of indicator place (not after precision) and precision place (not after size)
+static int	check_bad_place(const char *src, int start, int end, t_data data)
 {
 	while (start < end)
 	{
@@ -40,7 +40,7 @@ int		check_bad_place(const char *src, int start, int end, t_data data)		//check 
 	return (1);
 }
 
-int		check_too_many(const char *src, int start, int end, t_data data) 		//check if there are too many star or coma
+static int	check_too_many(const char *src, int start, int end, t_data data)
 {
 	while (start < end)
 	{
@@ -55,15 +55,15 @@ int		check_too_many(const char *src, int start, int end, t_data data) 		//check 
 	return (1);
 }
 
-int		check_format(const char *src, int start, int end)						//check the good format of the string between % and conversion
+int			check_format(const char *src, int start, int end)
 {
 	t_data  data;
 
 	data.conv = 0;
-	data = init_data_zero(data);
+	data = init_arg_and_data(data, 0);
 	if (check_bad_place(src, start, end, data) == -1)
 		return (-1);
-	data = init_data_zero(data);
+	data = init_arg_and_data(data, 0);
 	if (check_too_many(src, start, end, data) == -1)
 		return (-1);
 	return (1);

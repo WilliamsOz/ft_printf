@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_errors.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 15:58:37 by user42            #+#    #+#             */
-/*   Updated: 2020/11/18 17:54:26 by user42           ###   ########.fr       */
+/*   Created: 2020/09/16 17:30:15 by user42            #+#    #+#             */
+/*   Updated: 2020/11/26 01:52:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf_libft.h"
+#include "libft.h"
 
-int		check_all_errors(const char *src)										//check all errors
+void	ft_lstadd_front(t_list **alst, t_list *new)
 {
-	char	*conv;
-
-	conv = "cspdiuxX%n";
-	if (check_missing_conv(src, conv, 0) == -1)
-		return (-1);
-	return (1);
+	if (new != NULL)
+	{
+		new->next = (*alst);
+		(*alst) = new;
+	}
 }
