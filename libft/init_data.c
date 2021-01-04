@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 09:54:36 by user42            #+#    #+#             */
-/*   Updated: 2020/12/31 15:09:09 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/04 18:55:35 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ t_data	sort_data(t_data data)
 		data.width = data.width_star;
 	if (data.conv == 'c')
 		data.arg_string = &data.arg_char;
-	if (data.conv == '%' && data.precision > 0)
-		data.precision = data.arg_len;
-	if (data.conv == 'p')
+	else if (data.conv == 'p')
 		data.arg_string = data.arg_addr;
 	return (data);
 }
@@ -40,7 +38,7 @@ static t_data	init_arg_data(t_data data)
 	data.arg_string = NULL;
 	data.null_str_indicator = 0;
 	data.arg_char = '\0';
-	data.arg_imax = -1;
+	data.arg_imax = 0;
 	data.arg_umax = 0;
 	data.arg_addr = NULL;
 	data.hex_temp = NULL;

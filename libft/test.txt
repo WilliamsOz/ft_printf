@@ -1,43 +1,12 @@
-/*
 
-Test a inclure :
 
-	printf("p27 %.3x", 100);
-	printf("p28 %.0x", 0);
-	printf("p29 %.3u", 100);
-	printf("p30 %.0u", 100);
-	printf("p31 %.4u", 100);
-	printf("p32 %.10u", 100);
-	printf("p33 %.50u", 100);
-	printf("p34 %.1u", 100);
-	printf("p35 %.3u", 100);
-	printf("p36 %.0u", 0);
-	printf("%%");
-	printf("Hello 42 school! %s", NULL);
-	printf("%010%");
-	printf("%u", 4294967295);
-	printf("%d", 2147483647);
-	printf("%d", -2147483648);
-	printf("%x", 2147483647);
-	printf("%x", -2147483648);
-	printf("%X", 2147483647);
-	printf("%X", -2147483648);
-	printf("%x", 0);
-	printf("%010x", 0);
-	printf("%010x", 20);
-	printf("%010x", -20);
-	printf("%10x", 20);
-	printf("%10.2x", -20);
-	printf("%-10x", 50);
-	printf("%-15x", 0);
-	printf("%.1x", 500);
-	printf("%*.*x", 50, 10, 2);
-	printf("%x", -1);
-	printf("%");
-	printf("%40.50d", 50);
-    printf("%d", -589);
-    printf("%-4d", -2464);
-    printf("%.5d", -2372);
+
+
+
+
+
+
+
 	printf("%p", NULL);
 	printf("%015p", NULL);
 	printf("%15p", NULL);
