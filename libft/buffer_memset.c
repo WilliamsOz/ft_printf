@@ -6,13 +6,13 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:40:13 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/06 12:36:00 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/07 15:02:48 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	buffer_memset(char *buffer, size_t b_size)
+void	buffer_memset(char *buffer, int b_size)
 {
 	size_t	i;
 

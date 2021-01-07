@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/06 12:41:58 by wiozsert          #+#    #+#              #
-#    Updated: 2021/01/06 15:52:16 by wiozsert         ###   ########.fr        #
+#    Updated: 2021/01/07 10:51:05 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror
 PATHSRCS = ./srcs/
 PATHLIBFT = ./libft/
+ROOTFILEC = ft_printf.c
+ROOTFILEO = ft_printf.o
 FILESCLIBFT = $(PATHLIBFT)buffer_memset.c $(PATHLIBFT)ft_atoi.c $(PATHLIBFT)ft_itoa.c \
 $(PATHLIBFT)ft_putstr.c $(PATHLIBFT)ft_strcmp.c $(PATHLIBFT)ft_strlen.c \
 $(PATHLIBFT)ft_strsjoin.c $(PATHLIBFT)ft_uitoa.c $(PATHLIBFT)put_char_in_string.c \
@@ -50,13 +52,13 @@ BONUSO = flags_bonus.o lenght_bonus.o
 all : $(NAME)
 
 $(NAME) :
-	gcc $(FLAGS) -c $(FILESCLIBFT) $(FILESCSRCS)
-	ar -rcs $(NAME) $(FILESOLIBFT) $(FILESOSRCS)
+	gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS)
+	ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS)
 	mv $(FILESOSRCS) ./srcs
 	mv $(FILESOLIBFT) ./libft
 
 clean :
-	rm -rf $(PATHFILESCLIBFT) $(PATHFILESCSRCS) $(PATHFILESBONUSO)
+	rm -rf $(ROOTFILEO) $(PATHFILESCLIBFT) $(PATHFILESCSRCS) $(PATHFILESBONUSO)
 
 fclean : clean
 	rm -rf $(NAME)
@@ -64,8 +66,8 @@ fclean : clean
 re : fclean all
 
 bonus : fclean
-	gcc $(FLAGS) -c $(FILESCLIBFT) $(FILESCSRCS) $(BONUSC)
-	ar -rcs $(NAME) $(FILESOLIBFT) $(FILESOSRCS) $(BONUSO)
+	gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS) $(BONUSC)
+	ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS) $(BONUSO)
 	mv $(FILESOSRCS) ./srcs
 	mv $(FILESOLIBFT) ./libft
 	mv $(BONUSO) ./srcs

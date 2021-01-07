@@ -6,19 +6,19 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:44:43 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/06 14:49:47 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/07 15:29:19 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-static t_data	get_for_n_arg(t_data data, va_list list, char *c_str)
+static t_data	get_for_n_arg(t_data data, va_list list)
 {
 	if (data.d_l > 0)
 		data.arg_pinteger = (intmax_t*)va_arg(list, int*);
 	else
 		data.arg_pinteger = (long*)va_arg(list, int*);
-	*data.arg_pinteger = ft_strlen(c_str);
+	*data.arg_pinteger = data.len_c_str;
 	return (data);
 }
 
@@ -66,12 +66,12 @@ static t_data	get_integer_arg(t_data data, va_list list)
 	return (data);
 }
 
-t_data			get_arg(t_data data, va_list list, char *c_str)
+t_data			get_arg(t_data data, va_list list)
 {
 	if (data.conv == 'c' || data.conv == 's' || data.conv == 'p')
 		data = get_simple_arg(data, list);
 	else if (data.conv == 'n')
-		data = get_for_n_arg(data, list, c_str);
+		data = get_for_n_arg(data, list);
 	else if (data.conv == 'd' || data.conv == 'i')
 		data = get_integer_arg(data, list);
 	else if (data.conv == 'u' || data.conv == 'x' || data.conv == 'X')

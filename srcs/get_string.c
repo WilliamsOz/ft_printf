@@ -6,22 +6,25 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:45:55 by user42            #+#    #+#             */
-/*   Updated: 2021/01/06 12:00:46 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/07 15:22:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-char	*c_str_isnt_null(const char *src, char *c_str, int start, int end)
+static t_data	*str_notnull(const char *src, t_data *data, int start, int end)
 {
 	char	*temp;
 	char	*temp2;
 	int		i;
+	int		len;
 
-	temp = c_str;
+	temp = data->c_str;
 	i = 0;
-	if (!(temp2 = (char*)malloc(sizeof(char) * ((end - start) + 1))))
+	len = end - start;
+	if (!(temp2 = (char*)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
+	data->len_c_str += len;
 	temp2[end - start] = '\0';
 	while (start < end)
 	{
@@ -29,31 +32,32 @@ char	*c_str_isnt_null(const char *src, char *c_str, int start, int end)
 		i++;
 		start++;
 	}
-	c_str = ft_strsjoin(temp, temp2, 0, 0);
+	data->c_str = ft_strsjoin(temp, temp2, 0, 0);
 	free(temp);
 	free(temp2);
-	return (c_str);
+	return (data);
 }
 
-char	*get_string(const char *src, char *c_str, int start, int end)
+t_data		*get_string(const char *src, t_data *data, int start, int end)
 {
-	if (c_str == NULL)
+	if (data->c_str == NULL)
 	{
-		if ((c_str = (char*)malloc(sizeof(char) * end + 1)) == NULL)
+		if ((data->c_str = (char*)malloc(sizeof(char) * (end + 1)) == NULL))
 			return (NULL);
-		c_str[end] = '\0';
+		data->len_c_str += end;
+		data->c_str[end] = '\0';
 		while (start < end)
 		{
-			c_str[start] = src[start];
+			data->c_str[start] = src[start];
 			start++;
 		}
 	}
 	else
-		c_str = c_str_isnt_null(src, c_str, start, end);
-	return (c_str);
+		data = str_notnull(src, data, start, end);
+	return (data);
 }
 
-int		get_end(const char *src, int i)
+int			get_end(const char *src, int i)
 {
 	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
 		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
