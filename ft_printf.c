@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/31 16:50:35 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/07 09:55:36 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ size_t	get_len_of_conv(t_data *data, size_t arg_len, int *ptr_sign_of_width)
 		if ((*data).width < 0)
 			(*data).width *= -1;
 	}
-	if ((*data).conv == 'c')
+	if ((*data).conv == 'c' || (*data).conv == '%')
 		return (1);
-	else if((*data).conv == 's' || (*data).conv == 'p')
+	else if ((*data).conv == 's' || (*data).conv == 'p')
 	{
 		arg_len = ft_strlen((*data).arg_string);
-		if((*data).conv == 'p')
+		if ((*data).conv == 'p')
 			data->precision = (int)arg_len;
 	}
 	else if ((*data).conv == 'x' || (*data).conv == 'X')
@@ -35,38 +35,38 @@ size_t	get_len_of_conv(t_data *data, size_t arg_len, int *ptr_sign_of_width)
 	return (arg_len);
 }
 
-char	*exploit_data(t_data data, char *c_str, int sign_of_width, int B_SIZE)
+char	*exploit_data(t_data data, char *c_str, int sign_of_width, int b_size)
 {
 	if (data.plus > 0 || data.arg_imax < 0)
-		B_SIZE++;
+		b_size++;
 	else if (data.space > 0 && data.arg_imax > 0)
-		B_SIZE++;
+		b_size++;
 	else if (data.arg_imax < 0 && (data.conv == 'd' || data.conv == 'i'))
-		B_SIZE++;
+		b_size++;
 	if (data.conv == 'c' || data.conv == 's' || data.conv == 'p')
 	{
-		c_str = treat_cs(data, c_str, sign_of_width, B_SIZE);
+		if (data.conv == 'c')
+			data.arg_string = put_char_in_str(data.arg_string, data.arg_char);
+		c_str = treat_cs(data, c_str, sign_of_width, b_size);
 		return (c_str);
 	}
-	if (data.precision >= data.width)
-		B_SIZE = data.precision;
 	if (data.conv == 'd' || data.conv == 'i' || data.conv == 'u')
 	{
-		c_str =  treat_udi_di(data, c_str, sign_of_width, B_SIZE);
+		c_str = treat_udi_di(data, c_str, sign_of_width, b_size);
 		return (c_str);
 	}
 	if (data.htag > 0)
-		B_SIZE += 2;
+		b_size += 2;
 	if (data.conv == 'x' || data.conv == 'X')
-		c_str = treat_hex(data, c_str, sign_of_width, B_SIZE);
+		c_str = treat_hex(data, c_str, sign_of_width, b_size);
 	return (c_str);
 }
 
 char	*treat_content(const char *src, va_list list, char *c_str)
 {
 	t_data	data;
-	size_t	BUFFER_SIZE;
-	int 	sign_of_width;
+	size_t	buffer_size;
+	int		sign_of_width;
 
 	data.conv = 0;
 	sign_of_width = 0;
@@ -75,15 +75,15 @@ char	*treat_content(const char *src, va_list list, char *c_str)
 	data = get_arg(data, list, c_str);
 	data = sort_data(data);
 	data.arg_len = get_len_of_conv(&data, 0, &sign_of_width);
-	BUFFER_SIZE = data.arg_len;
-	if (data.width > (int)BUFFER_SIZE)
-		BUFFER_SIZE = data.width;
-	if (data.precision > (int)BUFFER_SIZE)
-		BUFFER_SIZE = data.precision;
-	if (data.conv != 'n' && data.conv != '%')
-		c_str = exploit_data(data, c_str, sign_of_width, BUFFER_SIZE);
-	else if (data.conv == '%')
-		c_str = treat_percent(c_str);
+	buffer_size = data.arg_len;
+	if (data.width > (int)buffer_size)
+		buffer_size = data.width;
+	if (data.precision > (int)buffer_size)
+		buffer_size = data.precision;
+	if (data.conv == '%')
+		c_str = treat_percent(data, c_str, buffer_size, sign_of_width);
+	else if (data.conv != 'n' && data.conv != '%')
+		c_str = exploit_data(data, c_str, sign_of_width, buffer_size);
 	return (c_str);
 }
 
@@ -107,29 +107,29 @@ char	*read_input(const char *src, va_list list, int i, char *c_str)
 			c_str = treat_content(src + (i + 1), list, c_str);
 			i = get_end(src, i + 1);
 			keep = i;
-
 		}
 	}
 	return (c_str);
 }
 
-int		ft_asprintf(char **content_string, const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list		list;
 	int			displayed_char;
-	// char		*content_string;
+	char		*content_string;
 
 	if (format[0] == '\0')
 		return (0);
 	if (check_all_errors(format) == -1)
 		return (-1);
+	content_string = NULL;
 	va_start(list, format);
-	*content_string = NULL;
-	*content_string = read_input(format, list, 0, *content_string);
+	content_string = read_input(format, list, 0, content_string);
 	va_end(list);
-	if (*content_string != NULL)
-		displayed_char = ft_strlen(*content_string);
+	if (content_string != NULL)
+		displayed_char = ft_strlen(content_string);
 	else
 		displayed_char = 0;
+	ft_putstr(content_string);
 	return (displayed_char);
 }

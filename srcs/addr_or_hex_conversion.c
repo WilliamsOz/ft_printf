@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 15:10:18 by wiozsert          #+#    #+#             */
-/*   Updated: 2020/12/11 18:33:42 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 14:49:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_data	get_address(t_data data, char *base, int i)
 {
 	char	res[19];
-	
+
 	if (data.arg_umax == 0)
 	{
 		data.arg_addr = "(nil)";
@@ -38,14 +38,14 @@ t_data	get_address(t_data data, char *base, int i)
 int		get_lenforhex(unsigned long long ull, unsigned int ui)
 {
 	int		len;
-	
+
 	len = 0;
-    if (ull == 0 && ui == 0)
-        return (1);
+	if (ull == 0 && ui == 0)
+		return (1);
 	while (ull > 0)
 	{
 		len++;
-		ull /= 16;	
+		ull /= 16;
 	}
 	while (ui > 0)
 	{
@@ -57,14 +57,16 @@ int		get_lenforhex(unsigned long long ull, unsigned int ui)
 
 t_data	convert_tiny_base(t_data data, char *base_t, char *res)
 {
-	int i;
+	uintmax_t	temp;
+	int			i;
 
-	i = get_lenforhex(data.arg_umax, 0) - 1;
+	temp = data.arg_umax;
+	i = get_lenforhex(temp, 0) - 1;
 	while (i >= 0)
 	{
-		res[i] = base_t[data.arg_umax % 16];
+		res[i] = base_t[temp % 16];
 		i--;
-		data.arg_umax /= 16;
+		temp /= 16;
 	}
 	data.hex_temp = ft_strsjoin(res, NULL, 0, 0);
 	return (data);
@@ -72,14 +74,16 @@ t_data	convert_tiny_base(t_data data, char *base_t, char *res)
 
 t_data	convert_caps_base(t_data data, char *base_c, char *res)
 {
-	int i;
+	uintmax_t	temp;
+	int			i;
 
-	i = get_lenforhex(data.arg_umax, 0) - 1;
+	temp = data.arg_umax;
+	i = get_lenforhex(temp, 0) - 1;
 	while (i >= 0)
 	{
-		res[i] = base_c[data.arg_umax % 16];
+		res[i] = base_c[temp % 16];
 		i--;
-		data.arg_umax /= 16;
+		temp /= 16;
 	}
 	data.hex_temp = ft_strsjoin(res, NULL, 0, 0);
 	return (data);
@@ -92,7 +96,7 @@ t_data	convert_hex(t_data data, char *base_t, char *base_c, int indicator)
 
 	i = -1;
 	while (++i < 17)
-		res[i] = '\0';	
+		res[i] = '\0';
 	if (indicator == 0)
 		data = convert_tiny_base(data, base_t, res);
 	else if (indicator == 1)

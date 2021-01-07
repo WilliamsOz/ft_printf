@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:50:45 by user42            #+#    #+#             */
-/*   Updated: 2020/12/11 16:33:38 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 11:40:52 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	check_too_many(const char *src, int start, int end, t_data data)
 
 int			check_format(const char *src, int start, int end)
 {
-	t_data  data;
+	t_data	data;
 
 	data.conv = 0;
 	data = init_arg_and_data(data, 0);

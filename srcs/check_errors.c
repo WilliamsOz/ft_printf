@@ -6,13 +6,13 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 15:58:37 by user42            #+#    #+#             */
-/*   Updated: 2020/12/11 16:22:25 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 11:34:40 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-int		check_all_errors(const char *src)										//check all errors
+int		check_all_errors(const char *src)
 {
 	char	*conv;
 

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buffer_memset.c                                    :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 14:40:13 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/06 12:36:00 by wiozsert         ###   ########.fr       */
+/*   Created: 2021/01/06 12:29:35 by wiozsert          #+#    #+#             */
+/*   Updated: 2021/01/06 12:36:36 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	buffer_memset(char *buffer, size_t b_size)
+static void		ft_putchar(char c)
 {
-	size_t	i;
+	write(1, &c, 1);
+}
+
+void			ft_putstr(const char *str)
+{
+	int i;
 
 	i = 0;
-	while (i < b_size)
+	while (str[i] != '\0')
 	{
-		buffer[i] = '\0';
+		ft_putchar(str[i]);
 		i++;
 	}
 }

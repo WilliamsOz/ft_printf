@@ -6,29 +6,23 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 09:54:36 by user42            #+#    #+#             */
-/*   Updated: 2021/01/04 18:55:35 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 12:38:11 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-t_data	sort_data(t_data data)
+t_data			sort_data(t_data data)
 {
 	if (data.zero > 0 && data.minus > 0)
 		data.zero = 0;
 	if (data.space > 0 && data.plus > 0)
 		data.space = 0;
-	if (data.zero > 0 && data.precision_coma > 0)
-		data.zero = 0;
-	if (data.precision < 0 && (data.conv == 'd' || data.conv == 'i'))
-		data.precision = 0;
 	if (data.arg_imax < 0 && data.space > 0)
 		data.space = 0;
 	if (data.width_star > 0)
 		data.width = data.width_star;
-	if (data.conv == 'c')
-		data.arg_string = &data.arg_char;
-	else if (data.conv == 'p')
+	if (data.conv == 'p')
 		data.arg_string = data.arg_addr;
 	return (data);
 }

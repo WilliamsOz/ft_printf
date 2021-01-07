@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 15:37:56 by user42            #+#    #+#             */
-/*   Updated: 2020/12/16 15:14:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/05 16:18:33 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,22 @@ char			*ft_itoa(intmax_t n)
 	int			sign;
 	int			size;
 	char		*nbr;
-	intmax_t	max_i;
 
 	sign = 0;
-	max_i = n;
-	if (max_i < 0)
+	if (n < 0)
 	{
 		sign += 1;
-		max_i *= -1;
+		n *= -1;
 	}
-	size = ft_intlen(max_i);
+	size = ft_intlen(n);
 	if (sign == 1)
 		size++;
 	if (!(nbr = (char*)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	nbr[size] = '\0';
 	if (sign == 1)
-		nbr = ft_itoa_neg(max_i, nbr);
+		nbr = ft_itoa_neg(n, nbr);
 	else
-		nbr = ft_itoa_pos(max_i, nbr);
+		nbr = ft_itoa_pos(n, nbr);
 	return (nbr);
 }

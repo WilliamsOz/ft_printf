@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:45:55 by user42            #+#    #+#             */
-/*   Updated: 2020/12/07 18:48:45 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 12:00:46 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*c_str_isnt_null(const char *src, char *c_str, int start, int end)
 {
-	char *temp;
-	char *temp2;
-	int i;
+	char	*temp;
+	char	*temp2;
+	int		i;
 
 	temp = c_str;
 	i = 0;
-	if (!(temp2 = (char*)malloc(sizeof(char) * ((end - start) + 1 ))))
+	if (!(temp2 = (char*)malloc(sizeof(char) * ((end - start) + 1))))
 		return (NULL);
 	temp2[end - start] = '\0';
 	while (start < end)

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:00:35 by wiozsert          #+#    #+#             */
-/*   Updated: 2020/12/07 18:04:32 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 12:20:35 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ char	*ft_strsjoin(char *str1, char *str2, int i, int len)
 		while (str2[i] != '\0')
 			dest[len++] = str2[i++];
 	return (dest);
+}
+
+char	*join_string(char *c_str, char *buffer)
+{
+	char	*temp;
+
+	temp = ft_strsjoin(c_str, buffer, 0, 0);
+	if (c_str != NULL)
+		free(c_str);
+	c_str = temp;
+	return (c_str);
 }

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 16:53:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/04 17:07:29 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 09:22:31 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*treat_pos_percent(t_data data, char *c_str, char *buffer, char c)
 	int		i;
 
 	i = 0;
-	while (--data.width > data.arg_len)
+	while (--data.width >= data.arg_len)
 		buffer[i++] = c;
 	buffer[i] = '%';
 	temp = ft_strsjoin(c_str, buffer, 0, 0);
@@ -35,7 +35,7 @@ static char	*treat_neg_percent(t_data data, char *c_str, char *buffer, char c)
 
 	i = 0;
 	buffer[i++] = '%';
-	while (--data.width > data.arg_len)
+	while (--data.width >= data.arg_len)
 		buffer[i++] = c;
 	temp = ft_strsjoin(c_str, buffer, 0, 0);
 	if (c_str != NULL)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_specifier_incompatiblity.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 15:02:44 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 17:36:57 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/06 11:42:15 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-int		sp_minus(const char *src, int i, int is_width)							//check incompatibility for minus
+int		sp_minus(const char *src, int i, int is_width)
 {
 	if (is_width == 1)
 		return (-1);
@@ -33,7 +33,7 @@ int		sp_minus(const char *src, int i, int is_width)							//check incompatibilit
 	return (1);
 }
 
-int		sp_plus(const char *src, int i, int is_width)				//check incompatibility for plus
+int		sp_plus(const char *src, int i, int is_width)
 {
 	if (is_width == 1)
 		return (-1);
@@ -54,7 +54,7 @@ int		sp_plus(const char *src, int i, int is_width)				//check incompatibility fo
 	return (1);
 }
 
-int		sp_space(const char *src, int i, int is_width)							//check incompatibility for space
+int		sp_space(const char *src, int i, int is_width)
 {
 	if (is_width == 1)
 		return (-1);
@@ -75,7 +75,7 @@ int		sp_space(const char *src, int i, int is_width)							//check incompatibilit
 	return (1);
 }
 
-int		sp_zero(const char *src, int i, int is_width)							//check incompatibility for zero
+int		sp_zero(const char *src, int i, int is_width)
 {
 	while (src[i] == '0')
 		i++;

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:16:02 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:42:28 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 11:40:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	isind_compatible(const char *src, int start, int end, int is_width)
 	return (1);
 }
 
-static int	check_for_unknow(const char *src, int i, int keep)						// check that flag and conversion after % is know OK
+static int	check_for_unknow(const char *src, int i, int keep)
 {
 	while (i < keep)
 	{
@@ -57,22 +57,22 @@ static int	check_format_after_lenght(const char *src, int start)
 {
 	while (src[start] == 'l' || src[start] == 'h')
 		start++;
-	if (src[start] != 'c' && src[start] != 's' && src[start] != 'p' && 
+	if (src[start] != 'c' && src[start] != 's' && src[start] != 'p' &&
 		src[start] != 'd' && src[start] != 'i' && src[start] != 'u' &&
 		src[start] != 'x' && src[start] != 'X' && src[start] != '%')
 		return (-1);
 	return (1);
 }
 
-static int		check_lenght(const char *src, int start, int end)
+static int	check_lenght(const char *src, int start, int end)
 {
 	t_data	data;
-	
+
 	data.l = 0;
 	data.h = 0;
 	while (start < end)
 	{
-		if ((src[start] == 'l' || src[start] == 'h') && 
+		if ((src[start] == 'l' || src[start] == 'h') &&
 			(check_format_after_lenght(src, start) == -1))
 			return (-1);
 		if (src[start] == 'l')
@@ -88,7 +88,7 @@ static int		check_lenght(const char *src, int start, int end)
 	return (1);
 }
 
-int				check_missing_conv(const char *src, char *conv, int i)					//check if conversion exist after %
+int			check_missing_conv(const char *src, char *conv, int i)
 {
 	int start;
 
@@ -98,7 +98,7 @@ int				check_missing_conv(const char *src, char *conv, int i)					//check if con
 		{
 			i++;
 			start = i;
-			i = strcmp_missing_conv(src, conv, i, 0);							// Compare 2 string and return index + 1 if conversion is found, othewise return -1
+			i = strcmp_missing_conv(src, conv, i, 0);
 			if (i == -1)
 				return (-1);
 			else if (check_for_unknow(src, start, i - 1) == -1)

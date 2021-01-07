@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/04 18:57:15 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 11:51:14 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		get_indicator(const char *src, t_data *data, int i)
 	}
 	return (i);
 }
-	
+
 static void		get_lenght(const char *src, t_data *data, int i)
 {
 	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
@@ -52,7 +52,7 @@ static void		get_lenght(const char *src, t_data *data, int i)
 		{
 			(*data).d_h++;
 			while (src[i] == 'h')
-				i++;	
+				i++;
 		}
 		else if (src[i] == 'h')
 			(*data).h++;
@@ -67,7 +67,7 @@ static void		get_width(const char *src, t_data *data, int i)
 		if ((src[i] >= '1' && src[i] <= '9') && (i == 0 || src[i - 1] == '-' ||
 			src[i - 1] == '+' || src[i - 1] == ' ' || src[i - 1] == '#' ||
 			src[i - 1] == '0'))
-				(*data).width = ft_atoi(src + i);
+			(*data).width = ft_atoi(src + i);
 		else if ((i == 0 || src[i - 1] == '-' || src[i - 1] == '+' ||
 			src[i - 1] == '0' || src[i - 1] == ' ' || src[i - 1] == '#') &&
 			(src[i] == '*'))
@@ -108,6 +108,6 @@ t_data			get_data(const char *src, t_data data, int i, va_list list)
 		data.precision_star = va_arg(list, int);
 		data.precision = data.precision_star;
 	}
-	data.conv = src[(get_end(src, 0) -1)];
+	data.conv = src[(get_end(src, 0) - 1)];
 	return (data);
 }

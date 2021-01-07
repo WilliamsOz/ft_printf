@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 15:51:09 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/04 17:50:16 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/06 12:16:21 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*treat_positive_cs(t_data data, char *c_str, char *buffer, int i)
 	{
 		while (data.width > data.arg_len && data.width-- > data.precision)
 			buffer[i++] = ' ';
-		while (data.arg_len-- > 0 && data.precision-- > 0)
+		while (j < data.precision)
 			buffer[i++] = data.arg_string[j++];
 	}
 	temp = ft_strsjoin(c_str, buffer, 0, 0);
@@ -62,16 +62,18 @@ static char	*treat_negative_cs(t_data data, char *c_str, char *buffer, int i)
 	return (c_str);
 }
 
-char	    *treat_cs(t_data data, char *c_str, int n_sign, size_t B_SIZE)
+char		*treat_cs(t_data data, char *c_str, int n_sign, size_t b_size)
 {
-	char	buffer[B_SIZE + 1];
+	char	buffer[b_size + 1];
 
-	buffer_memset(buffer, B_SIZE + 1);
+	buffer_memset(buffer, b_size + 1);
+	if (data.precision == -1 || data.precision > data.arg_len)
+		data.precision = data.arg_len;
 	if (data.precision >= data.arg_len && data.conv == 's' &&
 		data.null_str_indicator == 0)
 		data.precision = data.arg_len;
 	else if (data.arg_len > data.precision && data.conv == 's'
-		&& data.null_str_indicator == 0)
+		&& data.null_str_indicator == 0 && data.precision >= 0)
 		data.arg_len = data.precision;
 	if (data.conv == 'c')
 		data.precision = data.arg_len;

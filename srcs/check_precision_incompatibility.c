@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_precision_incompatibility.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:12:03 by user42            #+#    #+#             */
-/*   Updated: 2020/11/20 17:48:06 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/06 11:41:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-int		pr_coma(const char *src, int i)											//check incompatibility for coma
+int		pr_coma(const char *src, int i)
 {
 	if (src[i + 1] == ' ' || src[i + 1] == '.')
 		return (-1);
@@ -25,7 +25,7 @@ int		pr_coma(const char *src, int i)											//check incompatibility for coma
 	return (1);
 }
 
-int		pr_star(const char *src, int i, int is_width)							//check incompatibility for star
+int		pr_star(const char *src, int i, int is_width)
 {
 	if (src[i - 1] >= '1' && src[i - 1] <= '9')
 		is_width++;
