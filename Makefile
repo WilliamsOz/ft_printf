@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/06 12:41:58 by wiozsert          #+#    #+#              #
-#    Updated: 2021/01/07 10:51:05 by wiozsert         ###   ########.fr        #
+#    Updated: 2021/01/08 12:03:03 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(PATHSRCS)check_precision_incompatibility.o $(PATHSRCS)check_specifier_incompat
 $(PATHSRCS)get_arg_in_data.o $(PATHSRCS)get_data.o $(PATHSRCS)get_string.o \
 $(PATHSRCS)init_data.o $(PATHSRCS)treat_c_s_p.o $(PATHSRCS)treat_d_i_u.o \
 $(PATHSRCS)treat_hex.o $(PATHSRCS)treat_percent.o
-BONUSC = $(PATHSRCS)flags_bonus.c $(PATHSRCS)lenght_bonus.c
+# BONUSC = $(PATHSRCS)flags_bonus.c $(PATHSRCS)lenght_bonus.c
 FILESOLIBFT = buffer_memset.o ft_atoi.o ft_itoa.o \
 ft_putstr.o ft_strcmp.o ft_strlen.o \
 ft_strsjoin.o ft_uitoa.o put_char_in_string.o \
@@ -45,9 +45,9 @@ FILESOSRCS = addr_or_hex_conversion.o check_bad_format.o check_errors.o check_fo
 check_precision_incompatibility.o check_specifier_incompatibility.o \
 get_arg_in_data.o get_data.o get_string.o init_data.o treat_c_s_p.o \
 treat_d_i_u.o treat_hex.o treat_percent.o
-BONUSC = $(PATHSRCS)flags_bonus.c $(PATHSRCS)lenght_bonus.c
-PATHFILESBONUSO = $(PATHSRCS)flags_bonus.o $(PATHSRCS)lenght_bonus.o
-BONUSO = flags_bonus.o lenght_bonus.o
+# BONUSC = $(PATHSRCS)flags_bonus.c $(PATHSRCS)lenght_bonus.c
+# PATHFILESBONUSO = $(PATHSRCS)flags_bonus.o $(PATHSRCS)lenght_bonus.o
+# BONUSO = flags_bonus.o lenght_bonus.o
 
 all : $(NAME)
 
@@ -57,17 +57,16 @@ $(NAME) :
 	mv $(FILESOSRCS) ./srcs
 	mv $(FILESOLIBFT) ./libft
 
-clean :
-	rm -rf $(ROOTFILEO) $(PATHFILESCLIBFT) $(PATHFILESCSRCS) $(PATHFILESBONUSO)
+clean : # $(PATHFILESBONUSO)
+	rm -rf $(ROOTFILEO) $(PATHFILESCLIBFT) $(PATHFILESCSRCS)
 
 fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
 
-bonus : fclean
-	gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS) $(BONUSC)
-	ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS) $(BONUSO)
-	mv $(FILESOSRCS) ./srcs
-	mv $(FILESOLIBFT) ./libft
-	mv $(BONUSO) ./srcs
+# bonus : fclean # $(BONUSC) $(BONUSO)	mv $(BONUSO) ./srcs
+# 	gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS)
+# 	ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS)
+# 	mv $(FILESOSRCS) ./srcs
+# 	mv $(FILESOLIBFT) ./libft

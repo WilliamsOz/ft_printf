@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:44:43 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/07 15:29:19 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/08 11:49:26 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static t_data	get_for_n_arg(t_data data, va_list list)
 static t_data	get_simple_arg(t_data data, va_list list)
 {
 	if (data.conv == 'c')
+	{
 		data.arg_char = va_arg(list, int);
+	}
 	else if (data.conv == 's')
 	{
 		data.arg_string = va_arg(list, char*);
@@ -50,8 +52,8 @@ static t_data	get_uinteger(t_data data, va_list list)
 {
 	if (data.l == 0 && data.d_l == 0 && data.h == 0 && data.d_h == 0)
 		data.arg_umax = (unsigned int)va_arg(list, unsigned int);
-	else
-		data = bonus_lenght_uinteger(data, list);
+	// else
+	// 	data = bonus_lenght_uinteger(data, list);
 	data.arg_string = ft_uitoa(data.arg_umax);
 	return (data);
 }
@@ -60,8 +62,8 @@ static t_data	get_integer_arg(t_data data, va_list list)
 {
 	if (data.l == 0 && data.d_l == 0 && data.h == 0 && data.d_h == 0)
 		data.arg_imax = (int)va_arg(list, int);
-	else
-		data = bonus_lenght_integer(data, list);
+	// else
+	// 	data = bonus_lenght_integer(data, list);
 	data.arg_string = ft_itoa(data.arg_imax);
 	return (data);
 }

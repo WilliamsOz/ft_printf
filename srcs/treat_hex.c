@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 16:19:59 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/06 14:50:02 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/08 11:55:26 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static char	*treat_pos_hex(t_data data, char *buffer)
 	i = 0;
 	if (data.zero > 0)
 		c = '0';
-	if (data.htag > 0 && data.arg_umax > 0)
-		data = bonus_htag(data, buffer, &i);
+	// if (data.htag > 0 && data.arg_umax > 0)
+		// data = bonus_htag(data, buffer, &i);
 	while (data.width > data.arg_len && data.width-- > data.precision)
 		buffer[i++] = c;
 	while (data.precision-- > data.arg_len)
@@ -45,8 +45,8 @@ static char	*treat_neg_hex(t_data data, char *buffer)
 	i = 0;
 	if (data.zero > 0)
 		c = '0';
-	if (data.htag > 0 && data.arg_umax > 0)
-		data = bonus_htag(data, buffer, &i);
+	// if (data.htag > 0 && data.arg_umax > 0)
+		// data = bonus_htag(data, buffer, &i);
 	while (data.precision-- > data.arg_len)
 		buffer[i++] = '0';
 	while (j < data.arg_len)

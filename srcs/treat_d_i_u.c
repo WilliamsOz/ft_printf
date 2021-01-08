@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 15:52:53 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/06 14:19:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/08 11:59:48 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static t_data	init_buffer(t_data data, char *buffer, int *ptr_i)
 	if (data.arg_imax < 0 && data.width > data.arg_len &&
 		data.precision >= data.arg_len)
 		data.width--;
-	if (data.plus > 0 && (data.arg_imax >= 0 || data.arg_umax >= 0))
-		i = bonus_plus(buffer, i);
+	// if (data.plus > 0 && (data.arg_imax >= 0 || data.arg_umax >= 0))
+		// i = bonus_plus(buffer, i);
 	else if (data.arg_imax < 0 && ((data.precision > data.width) ||
 		(data.zero > 0 && data.precision >= data.width) ||
 		(data.zero > 0 && data.width > data.arg_len && data.precision == -1)))
@@ -29,8 +29,8 @@ static t_data	init_buffer(t_data data, char *buffer, int *ptr_i)
 		buffer[i++] = *data.arg_string;
 		*ptr_i = i;
 	}
-	else if (data.space > 0 && (data.arg_imax >= 0 || data.arg_umax >= 0))
-		i = bonus_space(buffer, i);
+	// else if (data.space > 0 && (data.arg_imax >= 0 || data.arg_umax >= 0))
+		// i = bonus_space(buffer, i);
 	return (data);
 }
 

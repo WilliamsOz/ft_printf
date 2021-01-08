@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2021/01/07 15:46:28 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/08 12:03:19 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ t_data	get_len_of_conv(t_data data, int arg_len)
 
 t_data	exploit_data(t_data data)
 {
-	if (data.conv == 'c' || data.conv == 's' || data.conv == 'p')
-		data = treat_csp(data);
+	if (data.conv == 'c')
+		data = treat_c(data);
+	else if (data.conv == 's')
+		data = treat_s(data);
 
 
 
@@ -71,14 +73,13 @@ t_data	exploit_data(t_data data)
 
 t_data	treat_content(const char *src, va_list list, t_data data)
 {
-	size_t	buffer_size;
-	int		sign_of_width;
+	// int		sign_of_width;
 
-	sign_of_width = 0;
+	// sign_of_width = 0;
 	data = init_arg_and_data(data, 1);
 	data = get_data(src, data, 0, list);
 	data = get_arg(data, list);
-	data = sort_data(data);
+	// data = sort_data(data);
 	data = get_len_of_conv(data, 0);
 	// buffer_size = data.arg_len;
 	// if (data.width > (int)buffer_size)
@@ -98,7 +99,6 @@ t_data	read_input(const char *src, va_list list, t_data data)
 	int		i;
 
 	keep = 0;
-	data.conv = 0;
 	i = 0;
 	while (src[i] != '\0')
 	{
@@ -123,20 +123,27 @@ int		ft_printf(const char *format, ...)
 {
 	t_data		data;
 	va_list		list;
-	int			displayed_char;
 
 	if (format[0] == '\0')
 		return (0);
 	if (check_all_errors(format) == -1)
 		return (-1);
+	data.len_c_str = 0;
 	data.c_str = NULL;
 	va_start(list, format);
 	data = read_input(format, list, data);
 	va_end(list);
-	if (data.c_str != NULL)
-		displayed_char = data.len_c_str;
+	if (data.c_str == NULL)
+		data.len_c_str = 0;
 	else
-		displayed_char = 0;
-	write(1, &data.c_str, data.len_c_str);
-	return (displayed_char);
+		write(1, data.c_str, data.len_c_str);
+	return (data.len_c_str);
+}
+
+int main(void)
+{
+
+	
+
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/06 11:51:14 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/08 11:34:59 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_data			get_data(const char *src, t_data data, int i, va_list list)
 		data.width_star = va_arg(list, int);
 		data.width = data.width_star;
 	}
-	if (data.precision_star >= 0)
+	if (data.precision_star > 0)
 	{
 		data.precision_star = va_arg(list, int);
 		data.precision = data.precision_star;

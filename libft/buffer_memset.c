@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:40:13 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/07 15:02:48 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/08 09:01:14 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	buffer_memset(char *buffer, int b_size)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (i < b_size)
