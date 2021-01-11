@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 10:50:45 by user42            #+#    #+#             */
-/*   Updated: 2021/01/06 11:40:52 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:37:34 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ static int	check_bad_place(const char *src, int start, int end, t_data data)
 			src[start] == ' ' || src[start] == '#' || src[start] == '*')))
 			return (-1);
 		while (src[start] == '*' || src[start] == '.')
-		{
 			start++;
-			data.precision_coma++;
-		}
-		if (data.precision_coma > 0 && (src[start] == '-' ||
+		if (data.precision > 0 && (src[start] == '-' ||
 			src[start] == '+' || src[start] == ' ' || src[start] == '#'))
 			return (-1);
 		start++;
@@ -45,12 +42,12 @@ static int	check_too_many(const char *src, int start, int end, t_data data)
 	while (start < end)
 	{
 		if (src[start] == '*')
-			data.precision_star++;
+			data.precision++;
 		else if (src[start] == '.')
 			data.minus++;
 		start++;
 	}
-	if (data.precision_star > 2 || data.minus > 1)
+	if (data.precision > 2 || data.minus > 1)
 		return (-1);
 	return (1);
 }

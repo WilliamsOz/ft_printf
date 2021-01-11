@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:46:23 by user42            #+#    #+#             */
-/*   Updated: 2021/01/08 11:29:42 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:17:53 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,9 @@ typedef struct			s_data
 	int					zero;
 	int					space;
 	int					htag;
-	int					width_star;
 	int					width;
 	int					sign_of_wdt;
 	char				fill_width;
-	int					precision_coma;
-	int					precision_star;
 	int					precision;
 	int					l;
 	int					d_l;

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/08 11:34:59 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:38:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static int		get_indicator(const char *src, t_data *data, int i)
 			(*data).space++;
 		else if (src[i] == '#')
 			(*data).htag++;
-		else if (src[i] == '.')
-			(*data).precision_coma++;
 		i++;
 	}
 	return (i);
@@ -71,7 +69,7 @@ static void		get_width(const char *src, t_data *data, int i)
 		else if ((i == 0 || src[i - 1] == '-' || src[i - 1] == '+' ||
 			src[i - 1] == '0' || src[i - 1] == ' ' || src[i - 1] == '#') &&
 			(src[i] == '*'))
-			(*data).width_star++;
+			(*data).width = -1;
 		i++;
 	}
 }
@@ -82,12 +80,10 @@ static void		get_prcsion(const char *src, t_data *data, int i)
 		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
 		src[i] != '%' && src[i] != 'n')
 	{
-		if (src[i] == '.')
-			(*data).precision_coma++;
-		else if (src[i] == '*' && src[i - 1] == '.')
-			(*data).precision_star++;
-		else if (src[i - 1] == '.' && src[i] >= '0' && src[i] <= '9')
+		if (src[i - 1] == '.' && src[i] >= '0' && src[i] <= '9')
 			(*data).precision = ft_atoi(src + i);
+		else if (src[i] == '*' && src[i - 1] == '.')
+			(*data).precision = -1;
 		i++;
 	}
 }
@@ -98,16 +94,10 @@ t_data			get_data(const char *src, t_data data, int i, va_list list)
 	get_width(src, &data, i);
 	get_prcsion(src, &data, 0);
 	get_lenght(src, &data, 0);
-	if (data.width_star > 0)
-	{
-		data.width_star = va_arg(list, int);
-		data.width = data.width_star;
-	}
-	if (data.precision_star > 0)
-	{
-		data.precision_star = va_arg(list, int);
-		data.precision = data.precision_star;
-	}
+	if (data.width == -1)
+		data.width = va_arg(list, int);
+	if (data.precision == -1)
+		data.precision = va_arg(list, int);
 	data.conv = src[(get_end(src, 0) - 1)];
 	return (data);
 }

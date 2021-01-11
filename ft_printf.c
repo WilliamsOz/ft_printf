@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2021/01/08 12:03:19 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:48:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_data	exploit_data(t_data data)
 {
 	if (data.conv == 'c')
 		data = treat_c(data);
-	else if (data.conv == 's')
-		data = treat_s(data);
+	// else if (data.conv == 's')
+		// data = treat_s(data);
 
 
 
@@ -140,10 +140,9 @@ int		ft_printf(const char *format, ...)
 	return (data.len_c_str);
 }
 
-int main(void)
-{
-
+// int main(void)
+// {
 	
 
-	return (0);
-}
+// 	return (0);
+// }

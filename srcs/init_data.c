@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 09:54:36 by user42            #+#    #+#             */
-/*   Updated: 2021/01/08 11:26:18 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/11 14:17:55 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ static t_data	init_data_zero(t_data data)
 	data.zero = 0;
 	data.space = 0;
 	data.htag = 0;
-	data.width_star = 0;
 	data.width = 0;
-	data.precision_coma = 0;
-	data.precision_star = 0;
 	data.precision = 0;
 	data.l = 0;
 	data.d_l = 0;
