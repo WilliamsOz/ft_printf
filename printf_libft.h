@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:36:36 by user42            #+#    #+#             */
-/*   Updated: 2021/01/11 14:20:39 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/14 14:52:03 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "libft/libft.h"
 
-// t_data					bonus_lenght_uinteger(t_data data, va_list list);
-// t_data					bonus_lenght_integer(t_data data, va_list list);
-// t_data					bonus_htag(t_data data, char *buffer, int *ptr_i);
-// int						bonus_plus(char *buffer, int i);
+t_data					bonus_lenght_uinteger(t_data data, va_list list);
+t_data					bonus_lenght_integer(t_data data, va_list list);
+t_data					bonus_htag(t_data data, char *buffer, int *ptr_i,
+	int ind);
+int						bonus_plus(char *buffer, int i, t_data *data);
 int						bonus_space(char *buffer, int i);
 t_data					*get_string(const char *src, t_data *data, int start,
 	int end);
@@ -34,26 +35,19 @@ int						check_format(const char *src, int start, int end);
 int						check_missing_conv(const char *src, char *conv, int i);
 int						check_all_errors(const char *src);
 t_data					get_hex_arg(t_data data, va_list list);
-int						get_lenforhex(unsigned long long ull,
-	unsigned int ui);
-t_data					convert_tiny_base(t_data data, char *base_t,
-	char *res);
-t_data					convert_caps_base(t_data data, char *base_c,
-	char *res);
-t_data					convert_hex(t_data data, char *base_t, char *base_c,
-	int indicator);
 t_data					get_address(t_data data, char *base, int i);
 t_data					get_data(const char *src, t_data data, int i,
 	va_list list);
 t_data					get_arg(t_data data, va_list list);
 t_data					init_arg_and_data(t_data data, int indicator);
-t_data					sort_data(t_data data);
 char					*treat_udi_di(t_data data, char *c_str,
 	int sign_of_width, int b_size);
-char					*treat_hex(t_data data, char *c_str, int sign_of_width,
-	int b_size);
-char					*treat_percent(t_data data, char *c_str, size_t bsize,
-	int sign_ow);
+t_data					treat_percent(t_data data);
+t_data					treat_hex(t_data data);
+t_data					treat_u_integer(t_data data);
+t_data					treat_d_i(t_data data);
+t_data					treat_p(t_data data);
+t_data					*treat_s(t_data *data);
 t_data					treat_c(t_data data);
 t_data					treat_content(const char *src, va_list list,
 	t_data data);

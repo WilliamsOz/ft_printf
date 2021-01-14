@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2021/01/11 14:48:20 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:27:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@ t_data	get_len_of_conv(t_data data, int arg_len)
 		return (data);
 	}
 	else if (data.conv == 's' || data.conv == 'p')
-	{
 		arg_len = ft_strlen(data.arg_string);
-		// if (data.conv == 'p')
-			// data->precision = (int)arg_len;
-	}
-	else if (data.conv == 'x' || data.conv == 'X')
-		arg_len = ft_strlen(data.hex_temp);
+	else if (data.conv == 'x' || data.conv == 'X' || data.conv == 'o')
+		arg_len = ft_strlen(data.arg_string);
 	else if (data.conv == 'u' || data.conv == 'd' || data.conv == 'i')
 		arg_len = ft_strlen(data.arg_string);
 	data.arg_len = arg_len;
@@ -37,59 +33,29 @@ t_data	exploit_data(t_data data)
 {
 	if (data.conv == 'c')
 		data = treat_c(data);
-	// else if (data.conv == 's')
-		// data = treat_s(data);
-
-
-
-
-
-
-	
-	// if (data.plus > 0 || data.arg_imax < 0)
-	// 	b_size++;
-	// else if (data.space > 0 && data.arg_imax > 0)
-	// 	b_size++;
-	// else if (data.arg_imax < 0 && (data.conv == 'd' || data.conv == 'i'))
-	// 	b_size++;
-	// if (data.conv == 'c' || data.conv == 's' || data.conv == 'p')
-	// {
-	// 	if (data.conv == 'c')
-	// 		data.arg_string = put_char_in_str(data.arg_string, data.arg_char);
-	// 	c_str = treat_cs(data, c_str, sign_of_width, b_size);
-	// 	return (c_str);
-	// }
-	// if (data.conv == 'd' || data.conv == 'i' || data.conv == 'u')
-	// {
-	// 	c_str = treat_udi_di(data, c_str, sign_of_width, b_size);
-	// 	return (c_str);
-	// }
-	// if (data.htag > 0)
-	// 	b_size += 2;
-	// if (data.conv == 'x' || data.conv == 'X')
-	// 	c_str = treat_hex(data, c_str, sign_of_width, b_size);
+	else if (data.conv == 's')
+		treat_s(&data);
+	else if (data.conv == 'p')
+		data = treat_p(data);
+	else if (data.conv == 'd' || data.conv == 'i')
+		data = treat_d_i(data);
+	else if (data.conv == 'x' || data.conv == 'X' || data.conv == 'o')
+		data = treat_hex(data);
+	else if (data.conv == 'u')
+		data = treat_u_integer(data);
 	return (data);
 }
 
 t_data	treat_content(const char *src, va_list list, t_data data)
 {
-	// int		sign_of_width;
-
-	// sign_of_width = 0;
 	data = init_arg_and_data(data, 1);
 	data = get_data(src, data, 0, list);
 	data = get_arg(data, list);
-	// data = sort_data(data);
 	data = get_len_of_conv(data, 0);
-	// buffer_size = data.arg_len;
-	// if (data.width > (int)buffer_size)
-		// buffer_size = data.width;
-	// if (data.precision > (int)buffer_size)
-		// buffer_size = data.precision;
 	if (data.conv != 'n' && data.conv != '%')
 		data = exploit_data(data);
-	// else if (data.conv == '%')
-		// data.c_str = treat_percent(data, c_str, buffer_size, sign_of_width);
+	else if (data.conv == '%')
+		data = treat_percent(data);
 	return (data);
 }
 
@@ -136,13 +102,16 @@ int		ft_printf(const char *format, ...)
 	if (data.c_str == NULL)
 		data.len_c_str = 0;
 	else
+	{
 		write(1, data.c_str, data.len_c_str);
+		free(data.c_str);
+	}
 	return (data.len_c_str);
 }
 
-// int main(void)
-// {
-	
-
-// 	return (0);
-// }
+int main(void)
+{
+	system("leaks cccns");
+	ft_printf("[Salut Narvalo ,\n%s il est %d:%d]", "Ca va", 42, 42);
+	return (0);
+}

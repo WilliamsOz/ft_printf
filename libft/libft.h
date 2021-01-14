@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:46:23 by user42            #+#    #+#             */
-/*   Updated: 2021/01/11 14:17:53 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/14 14:51:54 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,35 @@
 # include <stdint.h>
 # include <stdarg.h>
 
-typedef struct			s_data
+typedef struct		s_data
 {
-	int					conv;
-	int					minus;
-	int					plus;
-	int					zero;
-	int					space;
-	int					htag;
-	int					width;
-	int					sign_of_wdt;
-	char				fill_width;
-	int					precision;
-	int					l;
-	int					d_l;
-	int					h;
-	int					d_h;
-	char				*arg_string;
-	int					null_str_indicator;
-	char				arg_char;
-	intmax_t			arg_imax;
-	uintmax_t			arg_umax;
-	intmax_t			*arg_pinteger;
-	char				*arg_addr;
-	char				*hex_temp;
-	int					arg_len;
-	char				*c_str;
-	int					len_c_str;
-}						t_data;
+	int				conv;
+	int				minus;
+	int				plus;
+	int				zero;
+	int				space;
+	int				htag;
+	int				width_star;
+	int				width;
+	int				sign_of_wdt;
+	char			fill_width;
+	int				precision_coma;
+	int				precision_star;
+	int				precision;
+	int				l;
+	int				d_l;
+	int				h;
+	int				d_h;
+	char			*arg_string;
+	int				null_str_indicator;
+	char			arg_char;
+	intmax_t		arg_imax;
+	uintmax_t		arg_umax;
+	intmax_t		*arg_pinteger;
+	int				arg_len;
+	char			*c_str;
+	int				len_c_str;
+}					t_data;
 
 void				ft_putstr(const char *str);
 char				*put_char_in_str(char *str, char c);
@@ -61,14 +62,8 @@ char				*join_string(char *c_str, char *buffer);
 size_t				ft_strlen(const char *s);
 int					strcmp_missing_conv(const char *src, char *conv, int i,
 	int j);
-
-# include <stdio.h>
-# define DEBUG printf("ICI\n");
-# define PRINTD(x) printf("%d\n", x);
-# define PRINTC(x) printf("%c\n", x);
-# define PRINTS(x) printf("%s\n", x);
-# define PRINTP(x) printf("%p\n", x);
-# define PRINTZ(x) printf("%zu\n", x);
-# define PRINTJ(x) printf("%ju\n", x);
+t_data				convert_octal(t_data data, char *base);
+t_data				convert_hex(t_data data, char *base_t, char *base_c,
+	int ind);
 
 #endif

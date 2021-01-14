@@ -6,56 +6,80 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 16:53:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/06 09:22:31 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/13 12:29:17 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-static char	*treat_pos_percent(t_data data, char *c_str, char *buffer, char c)
+static t_data	treat_pos_percent(t_data data, char *buffer)
 {
-	char	*temp;
 	int		i;
 
 	i = 0;
-	while (--data.width >= data.arg_len)
-		buffer[i++] = c;
+	while (data.width > data.arg_len)
+	{
+		buffer[i++] = data.fill_width;
+		data.width--;
+	}
 	buffer[i] = '%';
-	temp = ft_strsjoin(c_str, buffer, 0, 0);
-	if (c_str != NULL)
-		free(c_str);
-	c_str = temp;
-	return (c_str);
+	return (data);
 }
 
-static char	*treat_neg_percent(t_data data, char *c_str, char *buffer, char c)
+static t_data	treat_neg_percent(t_data data, char *buffer)
 {
-	char	*temp;
 	int		i;
 
 	i = 0;
 	buffer[i++] = '%';
-	while (--data.width >= data.arg_len)
-		buffer[i++] = c;
-	temp = ft_strsjoin(c_str, buffer, 0, 0);
-	if (c_str != NULL)
-		free(c_str);
-	c_str = temp;
-	return (c_str);
+	while (data.width > data.arg_len)
+	{
+		buffer[i++] = data.fill_width;
+		data.width--;
+	}
+	return (data);
 }
 
-char		*treat_percent(t_data data, char *c_str, size_t bsize, int sign_ow)
+static t_data	sort_for_percent(t_data data, int *buffer_size, int size)
 {
-	char	buffer[bsize + 1];
-	char	c;
-
-	buffer_memset(buffer, bsize + 1);
-	c = ' ';
+	if (data.zero > 0 && data.minus > 0)
+		data.zero = 0;
+	if (data.minus > 0)
+		data.sign_of_wdt = -1;
 	if (data.zero > 0)
-		c = '0';
-	if (sign_ow == 0)
-		c_str = treat_pos_percent(data, c_str, buffer, c);
-	else if (sign_ow > 0)
-		c_str = treat_neg_percent(data, c_str, buffer, c);
-	return (c_str);
+		data.fill_width = '0';
+	if (data.width > data.arg_len)
+		size = data.width;
+	else if (data.arg_len > data.width)
+		size = data.arg_len;
+	*buffer_size = *buffer_size + size;
+	return (data);
+}
+
+static t_data	init_buffer(t_data data, int buffer_size)
+{
+	char	*temp;
+	char	buffer[buffer_size + 1];
+
+	buffer_memset(buffer, buffer_size + 1);
+	if (data.sign_of_wdt == 1)
+		data = treat_pos_percent(data, buffer);
+	else if (data.sign_of_wdt == -1)
+		data = treat_neg_percent(data, buffer);
+	data.len_c_str += ft_strlen(buffer);
+	temp = ft_strsjoin(data.c_str, buffer, 0, 0);
+	if (data.c_str != NULL)
+		free(data.c_str);
+	data.c_str = temp;
+	return (data);
+}
+
+t_data			treat_percent(t_data data)
+{
+	int		buffer_size;
+
+	buffer_size = 0;
+	data = sort_for_percent(data, &buffer_size, 0);
+	data = init_buffer(data, buffer_size);
+	return (data);
 }

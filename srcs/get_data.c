@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/11 14:38:25 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/14 11:20:11 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int		get_indicator(const char *src, t_data *data, int i)
 			(*data).space++;
 		else if (src[i] == '#')
 			(*data).htag++;
+		else if (src[i] == '.')
+			(*data).precision_coma++;
 		i++;
 	}
 	return (i);
@@ -65,11 +67,14 @@ static void		get_width(const char *src, t_data *data, int i)
 		if ((src[i] >= '1' && src[i] <= '9') && (i == 0 || src[i - 1] == '-' ||
 			src[i - 1] == '+' || src[i - 1] == ' ' || src[i - 1] == '#' ||
 			src[i - 1] == '0'))
+		{
 			(*data).width = ft_atoi(src + i);
+			(*data).null_str_indicator = 21;
+		}
 		else if ((i == 0 || src[i - 1] == '-' || src[i - 1] == '+' ||
 			src[i - 1] == '0' || src[i - 1] == ' ' || src[i - 1] == '#') &&
 			(src[i] == '*'))
-			(*data).width = -1;
+			(*data).width_star++;
 		i++;
 	}
 }
@@ -80,10 +85,12 @@ static void		get_prcsion(const char *src, t_data *data, int i)
 		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
 		src[i] != '%' && src[i] != 'n')
 	{
-		if (src[i - 1] == '.' && src[i] >= '0' && src[i] <= '9')
-			(*data).precision = ft_atoi(src + i);
+		if (src[i] == '.')
+			(*data).precision_coma++;
 		else if (src[i] == '*' && src[i - 1] == '.')
-			(*data).precision = -1;
+			(*data).precision_star++;
+		else if (src[i - 1] == '.' && src[i] >= '0' && src[i] <= '9')
+			(*data).precision = ft_atoi(src + i);
 		i++;
 	}
 }
@@ -94,10 +101,25 @@ t_data			get_data(const char *src, t_data data, int i, va_list list)
 	get_width(src, &data, i);
 	get_prcsion(src, &data, 0);
 	get_lenght(src, &data, 0);
-	if (data.width == -1)
-		data.width = va_arg(list, int);
-	if (data.precision == -1)
-		data.precision = va_arg(list, int);
 	data.conv = src[(get_end(src, 0) - 1)];
+	if (data.width_star > 0)
+	{
+		data.width_star = va_arg(list, int);
+		data.width = data.width_star;
+		if (data.width < 0 && data.conv != 's' && data.conv != 'c' &&
+			data.conv != 'd')
+		{
+			data.width *= -1;
+			data.sign_of_wdt = -1;
+		}
+	}
+	if (data.precision_star > 0)
+	{
+		data.precision_star = va_arg(list, int);
+		data.precision = data.precision_star;
+		if (data.precision < 0 && data.conv != 's' && data.conv != 'c' &&
+			data.conv != 'i')
+			data.precision *= -1;
+	}
 	return (data);
 }

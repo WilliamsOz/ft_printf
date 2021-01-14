@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:16:02 by user42            #+#    #+#             */
-/*   Updated: 2021/01/11 14:37:14 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/14 13:10:45 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static int	check_format_after_lenght(const char *src, int start)
 		start++;
 	if (src[start] != 'c' && src[start] != 's' && src[start] != 'p' &&
 		src[start] != 'd' && src[start] != 'i' && src[start] != 'u' &&
-		src[start] != 'x' && src[start] != 'X' && src[start] != '%')
+		src[start] != 'x' && src[start] != 'X' && src[start] != '%' &&
+		src[start] != 'o')
 		return (-1);
 	return (1);
 }

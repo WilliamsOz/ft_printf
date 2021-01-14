@@ -6,13 +6,13 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:45:55 by user42            #+#    #+#             */
-/*   Updated: 2021/01/08 11:32:03 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/14 13:15:54 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-static t_data		*notnull(const char *src, t_data *data, int start, int end)
+static t_data	*notnull(const char *src, t_data *data, int start, int end)
 {
 	char	*new_str;
 	char	*temp;
@@ -86,11 +86,11 @@ t_data			*get_string(const char *src, t_data *data, int start, int end)
 	return (data);
 }
 
-int			get_end(const char *src, int i)
+int				get_end(const char *src, int i)
 {
 	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
 		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
-		src[i] != '%' && src[i] != 'n')
+		src[i] != '%' && src[i] != 'n' && src[i] != 'o')
 		i++;
 	return (i + 1);
 }
