@@ -1,0 +1,1 @@
+Le but de ce projet est de recoder printf, ce projet porte principalement sur les arguments a taille variable.
