@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2021/01/14 15:27:20 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/15 08:58:42 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,4 @@ int		ft_printf(const char *format, ...)
 		free(data.c_str);
 	}
 	return (data.len_c_str);
-}
-
-int main(void)
-{
-	system("leaks cccns");
-	ft_printf("[Salut Narvalo ,\n%s il est %d:%d]", "Ca va", 42, 42);
-	return (0);
 }

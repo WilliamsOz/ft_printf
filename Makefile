@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/06 12:41:58 by wiozsert          #+#    #+#              #
-#    Updated: 2021/01/14 14:41:00 by wiozsert         ###   ########.fr        #
+#    Updated: 2021/01/15 09:05:13 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,16 +56,10 @@ BONUSO = flags_bonus.o lenght_bonus.o
 all : $(NAME)
 
 $(NAME) :
-	gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS) $(BONUSC)
-	ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS) $(BONUSO)
+	gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS)
+	ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS)
 	mv $(FILESOSRCS) ./srcs
 	mv $(FILESOLIBFT) ./libft
-	mv $(BONUSO) ./srcs
-#del
-	# gcc $(FLAGS) -c $(ROOTFILEC) $(FILESCLIBFT) $(FILESCSRCS)
-	# ar -rcs $(NAME) $(ROOTFILEO) $(FILESOLIBFT) $(FILESOSRCS)
-	# mv $(FILESOSRCS) ./srcs
-	# mv $(FILESOLIBFT) ./libft
 
 clean :
 	rm -rf $(ROOTFILEO) $(PATHFILESCLIBFT) $(PATHFILESCSRCS) $(PATHFILESBONUSO)
