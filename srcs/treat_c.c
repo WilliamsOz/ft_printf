@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 15:51:09 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/12 09:19:42 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/25 15:41:40 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 static t_data	treat_pos_c(t_data data, char *buffer)
 {
-	int		size;
 	int		i;
+	int		len;
 
 	i = 0;
-	size = 0;
+	len = 0;
 	while (data.width > data.arg_len)
 	{
 		buffer[i++] = data.fill_width;
 		data.width--;
-		size++;
+		len++;
 	}
 	buffer[i++] = data.arg_char;
-	size++;
-	join_c_conv(&data, buffer, size, 0);
-	data.len_c_str += size;
+	len++;
+	write(1, buffer, len);
+	data.len += len;
 	return (data);
 }
 
 static t_data	treat_neg_c(t_data data, char *buffer)
 {
-	int		size;
 	int		i;
+	int		len;
 
 	i = 0;
-	size = 0;
+	len = 0;
 	buffer[i++] = data.arg_char;
-	size++;
+	len++;
 	while (data.width > data.arg_len)
 	{
 		buffer[i++] = data.fill_width;
 		data.width--;
-		size++;
+		len++;
 	}
-	join_c_conv(&data, buffer, size, 0);
-	data.len_c_str += size;
+	write(1, buffer, len);
+	data.len += len;
 	return (data);
 }
 
@@ -69,18 +69,17 @@ static t_data	sort_for_c_conv(t_data data, int *buffer_size)
 	int size;
 
 	size = 0;
+	size = data.arg_len;
+	if (data.width > data.arg_len)
+		size = data.width;
 	if (data.width < 0 || data.minus > 0)
 	{
 		data.sign_of_wdt = -1;
+		if ((data.zero > 0 && data.minus > 0) || (data.zero > 0 && data.width < 0))
+			data.zero = 0;
 		if (data.width < 0)
 			data.width *= -1;
 	}
-	if (data.width > data.arg_len)
-		size = data.width;
-	else
-		size = data.arg_len;
-	if ((data.zero > 0 && data.minus > 0) || (data.zero > 0 && data.width < 0))
-		data.zero = 0;
 	if (data.zero > 0)
 		data.fill_width = '0';
 	*buffer_size = *buffer_size + size;

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 10:49:39 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/14 13:58:52 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/25 15:39:26 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static t_data	sort_for_x_convs(t_data data)
 	int	temp_arglen;
 
 	temp_precision = data.precision;
+	if ((data.zero > 0 && data.precision < 0) ||
+		(data.zero > 0 && data.sign_of_prc == -1))
+		data.fill_width = '0';
 	if (data.precision_coma == 0 || data.precision < 0)
 		data.precision = 0;
 	if (data.precision_coma > 0)
@@ -67,21 +70,15 @@ static t_data	sort_for_x_convs(t_data data)
 
 static t_data	init_buffer(t_data data, int buffer_size)
 {
-	char	*temp;
 	char	buffer[buffer_size + 1];
 
 	buffer_memset(buffer, buffer_size + 1);
-	if (data.zero > 0 && data.precision_coma == 0)
-		data.fill_width = '0';
 	if (data.sign_of_wdt == 1)
 		data = treat_pos_hex(data, buffer, 0, 0);
 	else if (data.sign_of_wdt == -1)
 		data = treat_neg_hex(data, buffer, 0, 0);
-	temp = ft_strsjoin(data.c_str, buffer, 0, 0);
-	if (data.c_str != NULL)
-		free(data.c_str);
-	data.c_str = temp;
-	data.len_c_str += ft_strlen(buffer);
+	data.len += ft_strlen(buffer);
+	write(1, buffer, ft_strlen(buffer));
 	return (data);
 }
 

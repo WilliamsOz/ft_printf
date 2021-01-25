@@ -6,16 +6,83 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/14 11:20:11 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/25 15:51:54 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf_libft.h"
 
-static int		get_indicator(const char *src, t_data *data, int i)
+static t_data	get_lenght(const char *src, t_data data, int i)
+{
+	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
+		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
+		src[i] != '%' && src[i] != 'n')
+	{
+		if (src[i] == 'l' && src[i + 1] == 'l')
+		{
+			data.d_l++;
+			while (src[i] == 'l')
+				i++;
+		}
+		else if (src[i] == 'l')
+			data.l++;
+		else if (src[i] == 'h' && src[i + 1] == 'h')
+		{
+			data.d_h++;
+			while (src[i] == 'h')
+				i++;
+		}
+		else if (src[i] == 'h')
+			data.h++;
+		i++;
+	}
+	return (data);
+}
+
+static t_data	get_prcsion(const char *src, t_data data, int i, va_list list)
+{
+	while (src[i] != '.')
+		i++;
+	i++;
+	if (src[i] == '*')
+	{
+		data.precision_star++;
+		data.precision = va_arg(list, int);
+		if (data.precision < 0)
+		{
+			data.sign_of_prc = -1;
+			data.precision *= -1;
+		}
+	}
+	else if (src[i] >= '0' && src[i] <= '9')
+		data.precision = ft_atoi(src + i);
+	return (data);
+}
+
+static t_data	get_width(const char *src, t_data data, int i, va_list list)
 {
 	while (src[i] == '-' || src[i] == '+' || src[i] == '0' || src[i] == ' ' ||
 		src[i] == '#')
+		i++;
+	if (src[i] >= '1' && src[i] <= '9')
+		data.width = ft_atoi(src + i);
+	else if (src[i] == '*')
+	{
+		data.width_star++;
+		data.width = va_arg(list, int);
+		if (data.width < 0)
+		{
+			data.width *= -1;
+			data.sign_of_wdt = -1;
+		}
+	}
+	return (data);
+}
+
+static int		get_ind(const char *src, t_data *data, int i, va_list list)
+{
+	while ((src[i] == '-' || src[i] == '+' || src[i] == ' ' ||
+		src[i] == '#' || src[i] == '.') || (src[i] >= '0' && src[i] <= '9'))
 	{
 		if (src[i] == '-')
 			(*data).minus++;
@@ -31,95 +98,16 @@ static int		get_indicator(const char *src, t_data *data, int i)
 			(*data).precision_coma++;
 		i++;
 	}
+	*data = get_width(src, *data, 0, list);
+	if ((*data).precision_coma > 0)
+		*data = get_prcsion(src, *data, 0, list);
+	*data = get_lenght(src, *data, 0);
 	return (i);
-}
-
-static void		get_lenght(const char *src, t_data *data, int i)
-{
-	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
-		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
-		src[i] != '%' && src[i] != 'n')
-	{
-		if (src[i] == 'l' && src[i + 1] == 'l')
-		{
-			(*data).d_l++;
-			while (src[i] == 'l')
-				i++;
-		}
-		else if (src[i] == 'l')
-			(*data).l++;
-		else if (src[i] == 'h' && src[i + 1] == 'h')
-		{
-			(*data).d_h++;
-			while (src[i] == 'h')
-				i++;
-		}
-		else if (src[i] == 'h')
-			(*data).h++;
-		i++;
-	}
-}
-
-static void		get_width(const char *src, t_data *data, int i)
-{
-	while ((src[i] >= '1' && src[i] <= '9') || src[i] == '*')
-	{
-		if ((src[i] >= '1' && src[i] <= '9') && (i == 0 || src[i - 1] == '-' ||
-			src[i - 1] == '+' || src[i - 1] == ' ' || src[i - 1] == '#' ||
-			src[i - 1] == '0'))
-		{
-			(*data).width = ft_atoi(src + i);
-			(*data).null_str_indicator = 21;
-		}
-		else if ((i == 0 || src[i - 1] == '-' || src[i - 1] == '+' ||
-			src[i - 1] == '0' || src[i - 1] == ' ' || src[i - 1] == '#') &&
-			(src[i] == '*'))
-			(*data).width_star++;
-		i++;
-	}
-}
-
-static void		get_prcsion(const char *src, t_data *data, int i)
-{
-	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
-		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
-		src[i] != '%' && src[i] != 'n')
-	{
-		if (src[i] == '.')
-			(*data).precision_coma++;
-		else if (src[i] == '*' && src[i - 1] == '.')
-			(*data).precision_star++;
-		else if (src[i - 1] == '.' && src[i] >= '0' && src[i] <= '9')
-			(*data).precision = ft_atoi(src + i);
-		i++;
-	}
 }
 
 t_data			get_data(const char *src, t_data data, int i, va_list list)
 {
-	i = get_indicator(src, &data, 0);
-	get_width(src, &data, i);
-	get_prcsion(src, &data, 0);
-	get_lenght(src, &data, 0);
+	i = get_ind(src, &data, 0, list);
 	data.conv = src[(get_end(src, 0) - 1)];
-	if (data.width_star > 0)
-	{
-		data.width_star = va_arg(list, int);
-		data.width = data.width_star;
-		if (data.width < 0 && data.conv != 's' && data.conv != 'c' &&
-			data.conv != 'd')
-		{
-			data.width *= -1;
-			data.sign_of_wdt = -1;
-		}
-	}
-	if (data.precision_star > 0)
-	{
-		data.precision_star = va_arg(list, int);
-		data.precision = data.precision_star;
-		if (data.precision < 0 && data.conv != 's' && data.conv != 'c' &&
-			data.conv != 'i')
-			data.precision *= -1;
-	}
 	return (data);
 }
