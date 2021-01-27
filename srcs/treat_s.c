@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 11:59:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/25 15:48:52 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/26 15:44:34 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static t_data		treat_pos_s(t_data data, char *buffer)
 		buffer[i++] = data.arg_string[j++];
 		data.arg_len--;
 	}
-	data.len += ft_strlen(buffer);
-	write(1, buffer, ft_strlen(buffer));
 	return (data);
 }
 
@@ -48,8 +46,6 @@ static t_data		treat_neg_s(t_data data, char *buffer)
 		buffer[i++] = data.fill_width;
 		data.width--;
 	}
-	data.len += ft_strlen(buffer);
-	write(1, buffer, ft_strlen(buffer));
 	return (data);
 }
 
@@ -62,6 +58,8 @@ static t_data		init_buffer(t_data data, int buffer_size)
 		data = treat_pos_s(data, buffer);
 	else if (data.sign_of_wdt == -1)
 		data = treat_neg_s(data, buffer);
+	data.len += ft_strlen(buffer);
+	write(1, buffer, ft_strlen(buffer));
 	return (data);
 }
 
@@ -71,7 +69,8 @@ static t_data		sort_for_s_conv(t_data data, int *buffer_size, int size)
 		data.precision = data.arg_len;
 	if (data.minus > 0)
 		data.sign_of_wdt = -1;
-	if (data.precision < data.arg_len && data.sign_of_prc == 1)
+	if (data.precision < data.arg_len && data.sign_of_prc == 1 &&
+		data.precision_coma > 0)
 		data.arg_len = data.precision;
 	else if (data.precision > data.arg_len)
 		data.precision = data.arg_len;
@@ -90,11 +89,11 @@ t_data				*treat_s(t_data *data)
 	int		buffer_size;
 
 	buffer_size = 0;
-	if (data->is_str_null == 1 && data->precision == 0 &&
-		data->width < data->arg_len)
+	if (data->is_str_null == 1 && data->precision_coma == 1 &&
+	data->precision == 0 && data->width == 0)
 		return (data);
-	if (data->precision_coma > 0 && data->precision == -1 &&
-		data->sign_of_prc == 0)
+	if (data->precision_coma > 0 && data->precision_coma == 0 &&
+		data->precision == 0)
 	{
 		if (!(data->arg_string = (char*)malloc(sizeof(char) * 1)))
 			return (NULL);

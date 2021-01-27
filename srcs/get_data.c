@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/25 15:51:54 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:06:01 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ static t_data	get_lenght(const char *src, t_data data, int i)
 
 static t_data	get_prcsion(const char *src, t_data data, int i, va_list list)
 {
-	while (src[i] != '.')
+	while (src[i] != '.' && src[i] != 'c' && src[i] != 's' && src[i] != 'p' &&
+		src[i] != 'd' && src[i] != 'i' && src[i] != 'u' && src[i] != 'x' &&
+		src[i] != 'X' && src[i] != '%' && src[i] != 'n')
 		i++;
-	i++;
+	if (src[i] == '.')
+	{
+		data.precision_coma++;
+		i++;
+	}
 	if (src[i] == '*')
 	{
 		data.precision_star++;
@@ -70,19 +76,18 @@ static t_data	get_width(const char *src, t_data data, int i, va_list list)
 	{
 		data.width_star++;
 		data.width = va_arg(list, int);
-		if (data.width < 0)
-		{
-			data.width *= -1;
-			data.sign_of_wdt = -1;
-		}
 	}
+	if (data.width < 0 || data.minus > 0)
+		data.sign_of_wdt = -1;
+	if (data.width < 0)
+		data.width *= -1;
 	return (data);
 }
 
 static int		get_ind(const char *src, t_data *data, int i, va_list list)
 {
 	while ((src[i] == '-' || src[i] == '+' || src[i] == ' ' ||
-		src[i] == '#' || src[i] == '.') || (src[i] >= '0' && src[i] <= '9'))
+		src[i] == '#' || src[i] == '0'))
 	{
 		if (src[i] == '-')
 			(*data).minus++;
@@ -94,13 +99,10 @@ static int		get_ind(const char *src, t_data *data, int i, va_list list)
 			(*data).space++;
 		else if (src[i] == '#')
 			(*data).htag++;
-		else if (src[i] == '.')
-			(*data).precision_coma++;
 		i++;
 	}
 	*data = get_width(src, *data, 0, list);
-	if ((*data).precision_coma > 0)
-		*data = get_prcsion(src, *data, 0, list);
+	*data = get_prcsion(src, *data, 0, list);
 	*data = get_lenght(src, *data, 0);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2021/01/25 15:54:31 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:47:09 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_data	treat_content(const char *src, va_list list, t_data data)
 	return (data);
 }
 
-t_data		read_input(const char *src, va_list list, t_data data)
+t_data	read_input(const char *src, va_list list, t_data data)
 {
 	int		i;
 
@@ -81,19 +81,3 @@ int		ft_printf(const char *format, ...)
 	va_end(list);
 	return (data.len);
 }
-
-// int main(void)
-// {
-// 	int mine = 0;
-// 	int true = 0;
-
-// 	mine = ft_printf("MINE : [%.*s]\n", -3, NULL);
-// 	true = printf("TRUE : [%.*s]\n", -3, NULL);
-// 	printf("mine : %d\n", mine);
-// 	printf("true : %d\n", true);
-// 	mine = ft_printf("MINE : [%-10.8s]\n", NULL);
-// 	true = printf("TRUE : [%-10.8s]\n", NULL);
-// 	printf("mine : %d\n", mine);
-// 	printf("true : %d\n", true);
-// 	return (0);
-// }

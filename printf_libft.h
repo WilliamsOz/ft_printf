@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:36:36 by user42            #+#    #+#             */
-/*   Updated: 2021/01/25 14:59:49 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/27 14:11:15 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include "libft/libft.h"
 
-t_data					bonus_lenght_for_n(t_data data, va_list list);
-t_data					bonus_lenght_uinteger(t_data data, va_list list);
-t_data					bonus_lenght_integer(t_data data, va_list list);
+void					init_bonus_data(t_b_type b_type);
+t_data					bl_for_n(t_data data, va_list list, t_b_type b_type);
+t_data					bl_uinteger(t_data data, va_list list, t_b_type b_type);
+t_data					bl_integer(t_data data, va_list list, t_b_type b_type);
 t_data					bonus_htag(t_data data, char *buffer, int *ptr_i,
 	int ind);
 int						bonus_plus(char *buffer, int i, t_data *data);
-int						bonus_space(char *buffer, int i);
+int						bonus_space(char *buffer, int i, t_data *data);
 int						get_end(const char *src, int i);
 char					*putinstr(char c, char *str, int len, int i);
 int						sp_minus(const char *src, int i, int is_width);

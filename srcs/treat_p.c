@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 10:44:24 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/25 15:38:52 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/26 11:55:09 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,13 @@ t_data			treat_p(t_data data)
 	if (data.arg_umax == 0 && data.width <= data.arg_len &&
 		data.precision <= data.arg_len)
 	{
-		data.len += ft_strlen(data.arg_string);
-		write(1, data.arg_string, data.len);
+		data.len += data.arg_len;
+		write(1, data.arg_string, data.arg_len);
 		return (data);
 	}
 	if (data.precision > data.arg_len)
 		data.precision += 2;
 	data = sort_for_p_conv(data, &buffer_size, 0);
 	data = init_buffer(data, buffer_size);
-	if (data.arg_string != NULL)
-		free(data.arg_string);
 	return (data);
 }

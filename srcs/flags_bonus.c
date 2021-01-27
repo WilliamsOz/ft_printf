@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 14:11:55 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/14 10:51:08 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/26 15:41:47 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ t_data		bonus_htag(t_data data, char *buffer, int *ptr_i, int ind)
 	return (data);
 }
 
-int			bonus_space(char *buffer, int i)
+int			bonus_space(char *buffer, int i, t_data *data)
 {
 	if (i > 0)
 		i--;
 	buffer[i++] = ' ';
+	(*data).width--;
 	return (i);
 }
 

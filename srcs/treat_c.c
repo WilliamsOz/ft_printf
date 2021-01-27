@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 15:51:09 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/25 15:41:40 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:47:48 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static t_data	sort_for_c_conv(t_data data, int *buffer_size)
 	if (data.width < 0 || data.minus > 0)
 	{
 		data.sign_of_wdt = -1;
-		if ((data.zero > 0 && data.minus > 0) || (data.zero > 0 && data.width < 0))
+		if ((data.zero > 0 && data.minus > 0) ||
+			(data.zero > 0 && data.width < 0))
 			data.zero = 0;
 		if (data.width < 0)
 			data.width *= -1;

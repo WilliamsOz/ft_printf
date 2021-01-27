@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:44:43 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/25 15:03:40 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:43:30 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 static t_data	get_for_n_arg(t_data data, va_list list)
 {
+	t_b_type	b_type;
+
+	b_type.i_llong = 0;
 	if (data.l == 0 && data.d_l == 0 && data.h == 0 && data.d_h == 0)
 		data.arg_pinteger = (intmax_t*)va_arg(list, int*);
 	else
-		data = bonus_lenght_for_n(data, list);
+	{
+		init_bonus_data(b_type);
+		data = bl_for_n(data, list, b_type);
+	}
 	*data.arg_pinteger = data.len;
 	return (data);
 }
@@ -48,10 +54,16 @@ static t_data	get_simple_arg(t_data data, va_list list)
 
 static t_data	get_uinteger(t_data data, va_list list)
 {
+	t_b_type	b_type;
+
+	b_type.i_llong = 0;
 	if (data.l == 0 && data.d_l == 0 && data.h == 0 && data.d_h == 0)
 		data.arg_umax = (unsigned int)va_arg(list, unsigned int);
 	else
-		data = bonus_lenght_uinteger(data, list);
+	{
+		init_bonus_data(b_type);
+		data = bl_uinteger(data, list, b_type);
+	}
 	if (data.conv == 'u')
 		data.arg_string = ft_uitoa(data.arg_umax);
 	else if (data.conv == 'x')
@@ -65,10 +77,16 @@ static t_data	get_uinteger(t_data data, va_list list)
 
 static t_data	get_integer_arg(t_data data, va_list list)
 {
+	t_b_type	b_type;
+
+	b_type.i_llong = 0;
 	if (data.l == 0 && data.d_l == 0 && data.h == 0 && data.d_h == 0)
 		data.arg_imax = (int)va_arg(list, int);
 	else
-		data = bonus_lenght_integer(data, list);
+	{
+		init_bonus_data(b_type);
+		data = bl_integer(data, list, b_type);
+	}
 	data.arg_string = ft_itoa(data.arg_imax);
 	return (data);
 }
