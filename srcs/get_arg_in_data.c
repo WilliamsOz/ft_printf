@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 18:44:43 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/28 10:24:25 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/28 12:05:39 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ static t_data	get_uinteger(t_data data, va_list list)
 		data = convert_hex(data, "0123456789abcdef", "0123456789ABCDEF", 0);
 	else if (data.conv == 'X')
 		data = convert_hex(data, "0123456789abcdef", "0123456789ABCDEF", 1);
-	else if (data.conv == 'o')
-		data = convert_octal(data, "01234567");
 	return (data);
 }
 
