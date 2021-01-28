@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 16:38:13 by user42            #+#    #+#             */
-/*   Updated: 2021/01/28 11:33:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/28 11:59:19 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_data	exploit_data(t_data data)
 		data = treat_p(data);
 	else if (data.conv == 'd' || data.conv == 'i')
 		data = treat_d_i(data);
-	else if (data.conv == 'x' || data.conv == 'X' || data.conv == 'o')
+	else if (data.conv == 'x' || data.conv == 'X')
 		data = treat_hex(data);
 	else if (data.conv == 'u')
 		data = treat_u_integer(data);
 	if (data.arg_string != NULL && (data.conv == 'p' || data.conv == 'u' ||
 		data.conv == 'x' || data.conv == 'X' || data.conv == 'd' ||
-		data.conv == 'i' || data.conv == 'o'))
+		data.conv == 'i'))
 		free(data.arg_string);
 	return (data);
 }

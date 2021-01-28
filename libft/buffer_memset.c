@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 14:40:13 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/28 10:39:01 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/28 11:58:49 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		get_end(const char *src, int i)
 {
 	while (src[i] != 'c' && src[i] != 's' && src[i] != 'p' && src[i] != 'd' &&
 		src[i] != 'i' && src[i] != 'u' && src[i] != 'x' && src[i] != 'X' &&
-		src[i] != '%' && src[i] != 'n' && src[i] != 'o')
+		src[i] != '%' && src[i] != 'n')
 		i++;
 	return (i + 1);
 }
