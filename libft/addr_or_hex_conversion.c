@@ -6,11 +6,11 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 15:10:18 by wiozsert          #+#    #+#             */
-/*   Updated: 2021/01/26 14:09:58 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/28 10:38:34 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf_libft.h"
+#include "libft.h"
 
 t_data			get_address(t_data data, char *base, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:46:23 by user42            #+#    #+#             */
-/*   Updated: 2021/01/27 15:29:51 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/28 11:33:41 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,6 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdarg.h>
-
-# include <stdio.h>				//del
-
-# define DEBUG printf("ICI\n");
-# define PRINTD(x) printf("%d\n", x);
-# define PRINTC(x) printf("%c\n", x);
-# define PRINTS(x) printf("%s\n", x);
-# define PRINTP(x) printf("%p\n", x);
-# define PRINTZ(x) printf("%zu\n", x);
-# define PRINTJ(x) printf("%ju\n", x);
-
-//del
 
 typedef struct			s_b_type
 {
@@ -75,9 +63,10 @@ typedef struct			s_data
 	int					len;
 }						t_data;
 
-void					ft_putstr(const char *str);
-char					*put_char_in_str(char *str, char c);
-int						ft_strcmp(const char *s1, const char *s2);
+t_data					get_address(t_data data, char *base, int i);
+t_data					convert_hex(t_data data, char *base_t, char *base_c,
+	int ind);
+int						get_end(const char *src, int i);
 void					buffer_memset(char *buffer, int b_size);
 char					*ft_uitoa(uintmax_t n);
 char					*ft_itoa(intmax_t n);

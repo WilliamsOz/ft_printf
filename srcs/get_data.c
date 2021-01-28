@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 18:24:21 by user42            #+#    #+#             */
-/*   Updated: 2021/01/27 15:06:01 by wiozsert         ###   ########.fr       */
+/*   Updated: 2021/01/28 10:47:05 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,32 +84,32 @@ static t_data	get_width(const char *src, t_data data, int i, va_list list)
 	return (data);
 }
 
-static int		get_ind(const char *src, t_data *data, int i, va_list list)
+static t_data	get_ind(const char *src, t_data data, int i, va_list list)
 {
 	while ((src[i] == '-' || src[i] == '+' || src[i] == ' ' ||
 		src[i] == '#' || src[i] == '0'))
 	{
 		if (src[i] == '-')
-			(*data).minus++;
+			data.minus++;
 		else if (src[i] == '+')
-			(*data).plus++;
+			data.plus++;
 		else if (src[i] == '0')
-			(*data).zero++;
+			data.zero++;
 		else if (src[i] == ' ')
-			(*data).space++;
+			data.space++;
 		else if (src[i] == '#')
-			(*data).htag++;
+			data.htag++;
 		i++;
 	}
-	*data = get_width(src, *data, 0, list);
-	*data = get_prcsion(src, *data, 0, list);
-	*data = get_lenght(src, *data, 0);
-	return (i);
+	data = get_width(src, data, 0, list);
+	data = get_prcsion(src, data, 0, list);
+	data = get_lenght(src, data, 0);
+	return (data);
 }
 
-t_data			get_data(const char *src, t_data data, int i, va_list list)
+t_data			get_data(const char *src, t_data data, va_list list)
 {
-	i = get_ind(src, &data, 0, list);
+	data = get_ind(src, data, 0, list);
 	data.conv = src[(get_end(src, 0) - 1)];
 	return (data);
 }
